@@ -1,30 +1,18 @@
+import { useState } from 'react';
+import { BsArrowLeftShort, BsSearch, BsChevronDown } from 'react-icons/bs';
+import logo from '../Assets/logonew.svg';
+import { AiFillHome, AiFillSetting } from "react-icons/ai";
+import { RiAdminFill, RiDashboardFill, RiLoginBoxFill, RiNotificationFill } from "react-icons/ri";
+import { IoPeople } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
-import React from 'react';
-import { BrowserRouter, Routes , Route} from 'react-router-dom';
-import Navbar from './Components/Navbar';
-import AddItem from './Pages/AddItem';
 
-function App() {
-  return (
-    <div className="App">
-    <BrowserRouter>
-    <Navbar/>
-    <Routes>
-    <Route path="/" element={<AddItem />} />
-    </Routes>
-    
-  </BrowserRouter>,
-    </div>
-  );
-}
-
-{/*}
-const App = () => {
+const Navbar = () => {
   const [open, setOpen] = useState(true);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const Menu = [
     {
-      title: "Home", icon: <AiFillHome />,
+      title: "Home", icon: <AiFillHome />, path: "/",
       submenu: true,
       submenuItems: [
         { title: "Apps" }
@@ -37,7 +25,7 @@ const App = () => {
       submenu: true,
       submenuItems: [
         { title: "Dashboard" },
-        { title: "Add Item" },
+        { title: "Add Item" ,path: "./Pages/AddItem.js"},
         { title: "Items" },
         { title: "Customers" },
         { title: "Customer Details" },
@@ -89,7 +77,7 @@ const App = () => {
            focus:outline-none ${!open && "hidden"}`} />
         </div>
 
-        {/* menu 
+        {/* menu */}
         <ul className='pt-2'>
           {Menu.map((menu, index) => (
             <>
@@ -102,6 +90,11 @@ const App = () => {
                   className='text-2xl block float-left'>
                   {menu.icon ? menu.icon : <RiDashboardFill />}
                 </span>
+                {menu.path ? (
+                  <Link to={menu.path} className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>
+                    {menu.title}
+                  </Link>
+                ) : (
                 <span
                   className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"
                     }`}>
@@ -109,6 +102,7 @@ const App = () => {
                   {menu.title}
 
                 </span>
+                )}
 
                 {menu.submenu && open && (
                   <BsChevronDown className={`${submenuOpen && "rotate-180"}`}
@@ -141,5 +135,5 @@ const App = () => {
     </div>
   );
 }
-*/}
-export default App;
+
+export default Navbar;
