@@ -13,7 +13,6 @@ function App() {
     <div className="App">
     <BrowserRouter>  
     <Routes>
-    
     <Route path="/" element={<AddItem/>}/>
     <Route path="/Item" element={<Item/>}/>
     <Route path="/Cart" element={<Cart/>}/>
