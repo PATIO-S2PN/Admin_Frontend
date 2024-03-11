@@ -232,8 +232,7 @@ const Navbar = () => {
   </div>
 </div>
 
-
-        
+    
 
         
 
