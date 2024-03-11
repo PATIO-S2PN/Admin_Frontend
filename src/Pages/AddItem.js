@@ -216,10 +216,14 @@ const Navbar = () => {
               onChange={handleInputChange}
             >
               <option value="">Select a Category</option>
+              <option value="Burgers">Burgers</option>
+              <option value="Submarines">Submarines</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Rice Bowls">Rice Bowls</option>
               <option value="Beverages">Beverages</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Soft Drinks">Soft Drinks</option>
-              <option value="Food">Food</option>
+              <option value="Desserts">Desserts</option>
+              <option value="Salads">Salads</option>
+              <option value="Pasta">Pasta</option>
             </select>
           </div>
           <div className="mb-4">
