@@ -202,22 +202,13 @@ const Navbar = () => {
   return (
     <div className={`flex bg-gray-300 h-auto p-5 pt-8 ${open ? 'w-72' : 'w-20'} duration-300 relative`}>
       <BsArrowLeftShort
-        className={`absolute cursor-pointer rounded-full bg-white p-1 text-3xl text-black border border-black top-9 -right-3 ${!open && 'rotate-180'}`}
+        className={`absolute mt-10 cursor-pointer rounded-full bg-white p-1 text-3xl text-black border border-black top-9 -right-3 ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
       />
-      <div className="cursor-pointer duration-500">
-        <img src={logo} alt="Logo" className="cursor-pointer duration-500" />
-        <div className="mb-2 border-t-2 border-gray-400"></div>
-      </div>
-      <div className={`flex items-center rounded-md bg-gray-200 mt-6 py-2.5 ${!open ? 'px-2.5' : 'px-4'}`}>
-        <BsSearch className={`block float-left text-lg text-black ${open && 'mr-2'}`} />
-        <input
-          type="search"
-          placeholder="Search"
-          className={`w-full bg-transparent text-base text-white focus:outline-none ${!open && 'hidden'}`}
-        />
-      </div>
-      <ul className="pt-2">
+     
+
+      
+      <ul className="pt-2 mt-10">
         {Menu.map((menu, index) => (
           <React.Fragment key={index}>
             <li
