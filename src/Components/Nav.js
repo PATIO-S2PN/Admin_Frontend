@@ -1,35 +1,34 @@
 import React from 'react';
+import { BsSearch } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import logo from '../Assets/logonew.svg';
 
 function Nav() {
   return (
     <nav className="bg-gray-300 shadow-md">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo */}
+          <div className="shrink-0">
+            <img src={logo} alt="Logo" className="h-10 w-auto" />
           </div>
-          <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex-shrink-0 flex items-center">
-              {/* Logo and branding */}
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
-              
+
+          {/* Search Input - Adjust for mobile */}
+          <div className="w-1/2 basis-full md:basis-auto md:flex md:items-center">
+            <div className="relative w-full">
+              <BsSearch className="text-black text-lg absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer" />
+              <input type="text" placeholder="Search Items" className="w-full pl-10 py-2 px-4 bg-gray-100 border rounded-lg" />
             </div>
-            
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {/* Profile dropdown */}
-            <Link to="/login">
-              <button className="px-4 py-2 text-sm bg-gray-400 rounded-lg hover:bg-gray-500">
-                Login
-              </button>
-              
-            </Link>
-          </div>
+
+          {/* Login Button - Adjusted for responsiveness */}
+          <Link to="/login" className="ml-4">
+            <button className="px-4 py-2 text-sm text-white bg-gray-400 rounded hover:bg-gray-700 transition-colors duration-300">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
-      
     </nav>
   );
 }
