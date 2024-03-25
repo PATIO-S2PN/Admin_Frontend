@@ -50,6 +50,10 @@ import CDetails from './Pages/CDetails';
 import Orders from './Pages/Orders';
 import ODetails from './Pages/ODetails';
 import NavBar from './Components/Navbar';
+import SMembers from './Pages/SMembers';
+import PSetting from './Pages/PSetting';
+
+
 // Import other pages as needed
 
 function App() {
@@ -68,6 +72,10 @@ function App() {
              <Route path="/cdetails" element={<CDetails/>}/>
            <Route path="/orders" element={<Orders/>}/>
              <Route path="/odetail" element={<ODetails/>}/>
+             <Route path="/smembers" element={<SMembers/>}/>
+             <Route path="/psetting" element={<PSetting/>}/>
+
+
 
             {/* Define more routes as needed */}
           </Routes>
