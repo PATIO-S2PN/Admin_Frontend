@@ -1,65 +1,104 @@
-import React from 'react'
-import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+    const [userDetails, setUserDetails] = useState({
+        name: '',
+        email: '',
+        position: '',
+        password: '',
+        confirmPassword: ''
+    });
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserDetails(prevDetails => ({
+            ...prevDetails,
+            [name]: value
+        }));
+    };
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        if (userDetails.password !== userDetails.confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+        try {
+            const response = await fetch('admin-main-backend\src\api\admin.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: userDetails.email,
+                    password: userDetails.password,
+                    phone: userDetails.position, // Assuming 'position' field as 'phone' for demonstration
+                    role: 'admin', // Assuming role, adjust as necessary
+                    profilePicture: '' // Assuming no picture, adjust as necessary
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Signup successful, please check your email to verify.');
+                navigate('/login'); // Navigate to login page or dashboard as needed
+            } else {
+                throw new Error(data.message || 'Failed to register');
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+            alert(error.message);
+        }
+    };
+
     return (
-        <div className='flex items-center h-auto bg-gray-100'>
-            <div className='text-3xl flex flex-1 items-center justify-center mt-10 mb-2 text-center '>
-                <div className='border-4 bg-gray-200 w-4/5 mt-2 border-blue-900 p-14 rounded-md shadow-slate-500 shadow-2xl'>
-
-                    <div className='flex justify-center items-center  '>
-                        <img src={logo} alt="Logo" className="h-20" />
-                    </div><div className='flex justify-center items-center mb-5'>
-                        <p className='text-black mb-5 text-opacity-70 font-semibold text-4xl text-left'>Create Your Account</p>
+        <div className='flex items-center justify-center min-h-screen bg-gray-100'>
+            <div className='bg-gray-200 p-10 rounded-lg shadow-lg w-full max-w-md'>
+                <form onSubmit={handleSignUp} className='space-y-4'>
+                    <div className='flex justify-center'>
+                        <img src={logo} alt="LuxeDine Logo" className="h-20 mb-4" />
                     </div>
-                    <div className='flex flex-row mb-0'>
-                        <label className='text-black text-opacity-70 font-semibold text-xl mb-2'>Name</label>
-                    </div>
-                    <input className='w-full p-2 border-2 text-xl mb-2 rounded-md border-gray-300 outline-none' type="text" placeholder='Your Name' />
-
-                    <div className='flex flex-row mb-0'>
-                        <label className='text-black text-opacity-70 font-semibold text-xl mb-2'>Email</label>
-                    </div>
-                    <input className='w-full p-2 border-2 mb-2 text-xl rounded-md border-gray-300 outline-none' type="email" placeholder='Your Email Address' />
-
-                    <div className='flex flex-row mb-0'>
-                        <label className='text-black text-opacity-70 font-semibold text-xl mb-2'>Position</label>
-                    </div>
-                    <input className='w-full p-2 border-2 mb-2 text-xl rounded-md border-gray-300 outline-none' type="text" placeholder='Your Position' />
-
-                    <div className='flex flex-row mb-0'>
-                        <label className='text-black text-opacity-70 font-semibold text-xl mb-2'>Create Password</label>
-                    </div> <div className='flex flex-row mb-0'>
-                        <input className='w-1/2 p-2 border-2 mb-2 text-xl rounded-md border-gray-300 outline-none'
-                            type='password' placeholder='Enter the Password' />
-                    </div>
-
-                    <div className='flex flex-row mb-0'>
-                        <label className='text-black text-opacity-70 font-semibold text-xl mb-2'>Confirm Password</label>
-                    </div> <div className='flex flex-row mb-0'>
-                        <input className='w-1/2 p-2 border-2 mb-5 text-xl rounded-md border-gray-300 outline-none'
-                            type='password' placeholder='Confirm Password' />
+                    <h2 className='text-2xl font-bold text-center text-gray-700'>Create Your Account</h2>
+                    <div>
+                        <label className='block text-gray-700 text-sm font-bold mb-2'>Name</label>
+                        <input className='text-lg w-full p-2 border rounded-md outline-none' type="text" placeholder='Your Name' name="name" value={userDetails.name} onChange={handleChange} />
                     </div>
                     <div>
-                        <button className='w-1/2 bg-gray-500 text-white px-10 py-1 font-bold hover:bg-gray-800 duration-300'>
-                            Create</button></div>
-                    <div className='flex items-center gap-10 justify-center mt-10'>
-                        <h2 className='mr-2 text-xl '>SignUp with</h2>
+                        <label className='block text-gray-700 text-sm font-bold mb-2'>Email</label>
+                        <input className='text-lg w-full p-2 border rounded-md outline-none' type="email" placeholder='Your Email Address' name="email" value={userDetails.email} onChange={handleChange} />
                     </div>
-                    <div className='flex items-center gap-10 justify-center mt-10'>
-                        <FaFacebook className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
-                        <FaGoogle className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
-                        <FaTwitter className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
+                    <div>
+                        <label className='block text-gray-700 text-sm font-bold mb-2'>Position</label>
+                        <input className='text-lg w-full p-2 border rounded-md outline-none' type="text" placeholder='Your Position' name="position" value={userDetails.position} onChange={handleChange} />
                     </div>
-
-
-
+                    <div>
+                        <label className='block text-gray-700 text-sm font-bold mb-2'>Create Password</label>
+                        <input className='text-lg w-full p-2 border rounded-md outline-none' type='password' placeholder='Enter the Password' name="password" value={userDetails.password} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className='block text-gray-700 text-sm font-bold mb-2'>Confirm Password</label>
+                        <input className='text-lg w-full p-2 border rounded-md outline-none' type='password' placeholder='Confirm Password' name="confirmPassword" value={userDetails.confirmPassword} onChange={handleChange} />
+                    </div>
+                    <button type='submit' className='w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600'>Create</button>
+                    <div className='text-center'>
+                        <span className='text-gray-600 text-sm'>SignUp with</span>
+                    </div>
+                    <div className='flex justify-center space-x-4 text-2xl'>
+                        <FaFacebook className='cursor-pointer hover:text-blue-600' />
+                        <FaGoogle className='cursor-pointer hover:text-red-600' />
+                        <FaTwitter className='cursor-pointer hover:text-blue-400' />
+                    </div>
+                </form>
+                <div className='text-center mt-4'>
+                    <p className='text-gray-600 text-sm'>Already have an account? <Link to="/login" className='text-blue-500 font-bold'>Login</Link></p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default SignUp
+export default SignUp;
