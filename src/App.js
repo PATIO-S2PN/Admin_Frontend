@@ -10,6 +10,7 @@ import Customer from './Pages/Customer';
 import CDetails from './Pages/CDetails';
 import Orders from './Pages/Orders';
 import ODetails from './Pages/ODetails';
+
 import Login from './Authentication/Login';
 import Signup from './Authentication/SignUp';
 import ForgotPassword from './Authentication/ForgetPw';
@@ -18,6 +19,7 @@ import Notification from './Pages/Notifications';
 import Setting from './Pages/Setting';
 import AdminFeedback from './Pages/AdminFeedback';
 import axios from 'axios';
+
 
 
 
@@ -40,11 +42,16 @@ function App() {
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/item" element={<Item />} />
             <Route path="/Cart" element={<Cart />} />
-            <Route path="/customer" element={<Customer/>}/>
-            <Route path="/cdetails" element={<CDetails/>}/>
-            <Route path="/orders" element={<Orders/>}/>
-            <Route path="/odetail" element={<ODetails/>}/>
-            <Route path="/adminFeedback" element={<AdminFeedback/>}/>
+
+             <Route path="/customer" element={<Customer/>}/>
+             <Route path="/cdetails" element={<CDetails/>}/>
+           <Route path="/orders" element={<Orders/>}/>
+             <Route path="/odetail" element={<ODetails/>}/>
+             <Route path="/smembers" element={<SMembers/>}/>
+             <Route path="/psetting" element={<PSetting/>}/>
+
+
+
 
             
           </Routes>
