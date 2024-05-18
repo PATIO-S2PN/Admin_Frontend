@@ -1,12 +1,67 @@
 import React from 'react';
+import { useState } from 'react';
 
 const CustomerDetailsPage = () => {
+  const [orderStatus, setOrderStatus] = useState('preparing');
+  const [inputBgClass, setInputBgClass] = useState('bg-green-300');
+
+  const handleStatusChange = (event) => {
+    const status = event.target.value;
+    setOrderStatus(status);
+
+    switch (status) {
+      case 'preparing':
+        setInputBgClass('bg-green-300');
+        break;
+      case 'processing':
+        setInputBgClass('bg-blue-300');
+        break;
+      case 'get_ready':
+        setInputBgClass('bg-red-400');
+        break;
+      default:
+        setInputBgClass('');
+    }
+  };
+
   return (
-    <div className="p-4">
+    <div className="p-4 h-screen bg-gray-200">
+      
       <h1 className="text-3xl font-bold mb-4">Order Details</h1>
 
-      <h1 className="text-1xl font-bold mt-2">Order #445</h1>
-      <p>Customer ID: 45632</p>
+
+      <div className='flex flex-col sm:flex-row mb-0 items-center space-y-2 sm:space-y-0 sm:space-x-4'>
+  <label className='text-black mt-2 font-semibold text-xl mb-2 sm:mb-0'>Order ID :</label>
+  <input 
+    className='w-full sm:w-1/3 p-2 border-2 text-xl rounded-md bg-gray-200 outline-none' 
+    type="text" 
+  />
+  <label className='text-black mt-2 font-semibold text-xl mb-2 sm:mb-0'>Order Status :</label>
+      <div className='w-full sm:w-1/3'>
+        <select 
+          className={`w-full p-2 border-2 text-xl rounded-md outline-none ${inputBgClass}`}
+          value={orderStatus}
+          onChange={handleStatusChange}
+        >
+          <option className='font-bold bg-green-300' value="preparing">Preparing</option>
+          <option className='font-bold bg-blue-300' value="processing">Processing</option>
+          <option className='font-bold bg-red-500' value="get_ready">Get Ready</option>
+        </select>
+      </div></div>
+
+
+
+
+<div className='flex flex-col sm:flex-row mb-0 items-center space-y-2 sm:space-y-0 sm:space-x-4'>
+  <label className='text-black mt-2 font-semibold text-xl mb-2 sm:mb-0'>Customer ID :</label>
+  <input 
+    className='w-full sm:w-1/2 p-2 border-2 text-xl rounded-md bg-gray-200 outline-none' 
+    type="text" 
+  />
+</div>
+
+      
+
 
       <div className="flex flex-wrap mt-3">
         <div className="bg-gray-300 text-center w-full md:w-3/4 p-4 md:mr-4 mb-4 md:mb-0">
