@@ -1,5 +1,5 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -14,7 +14,16 @@ const AddItem = () => {
     rating: '',
     images: []
   });
+  
   const [imagePreview, setImagePreview] = useState([]);
+  const navigate = useNavigate(); // Create navigate instance
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login'); // Redirect to login if no token found
+    }
+  }, [navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,9 +52,13 @@ const AddItem = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8002/product/create', formData, {
+      const token = localStorage.getItem('token');
+
+      const response = await axios.post('http://18.234.113.85/product/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}` // Add this line
+
         },
       });
       console.log(response.data); // Handle the response as needed

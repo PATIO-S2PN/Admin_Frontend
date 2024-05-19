@@ -19,16 +19,17 @@ import Notification from './Pages/Notifications';
 import Setting from './Pages/Setting';
 import AdminFeedback from './Pages/AdminFeedback';
 import axios from 'axios';
-
+import SMembers from './Pages/SMembers';
+import PSetting from './Pages/PSetting';
 
 
 
 
 function App() {
   return (
-    <div className="App flex">
+    <div className="flex App">
       <BrowserRouter>
-        <Navbar className="fixed w-72 h-screen overflow-auto bg-white" />
+        <Navbar className="fixed h-screen overflow-auto bg-white w-72" />
         <div className="flex-grow overflow-auto">
           <Nav className="fixed w-64 h-screen overflow-auto bg-white" />
           <Routes>
