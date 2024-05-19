@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/admin/signin', {
+      const response = await fetch('http://18.234.113.85/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,13 +36,13 @@ const Login = () => {
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-100'>
-      <div className='text-3xl flex flex-1 items-center justify-center mb-5 text-center '>
-        <form className='border-4 bg-gray-200 w-3/5 border-blue-900 p-14 rounded-md shadow-slate-500 shadow-2xl' onSubmit={handleLogin}>
-          <div className='flex justify-center items-center mb-5'>
+      <div className='flex items-center justify-center flex-1 mb-5 text-3xl text-center '>
+        <form className='w-3/5 bg-gray-200 border-4 border-blue-900 rounded-md shadow-2xl p-14 shadow-slate-500' onSubmit={handleLogin}>
+          <div className='flex items-center justify-center mb-5'>
             <img src={logo} alt="Logo" className="h-20" />
           </div>
-          <p className='text-black mb-5 text-opacity-70 font-semibold text-xl text-center'>Login to continue</p>
-          <div className='flex items-center mb-5 text-xl bg-white p-2 border-2 rounded-md border-gray-300'>
+          <p className='mb-5 text-xl font-semibold text-center text-black text-opacity-70'>Login to continue</p>
+          <div className='flex items-center p-2 mb-5 text-xl bg-white border-2 border-gray-300 rounded-md'>
             <FaUser className='text-2xl text-black' />
             <input
               className='w-full px-5 outline-none'
@@ -52,7 +52,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className='flex items-center  text-xl bg-white p-2 border-2 rounded-md'>
+          <div className='flex items-center p-2 text-xl bg-white border-2 rounded-md'>
             <FaLock className='text-2xl text-black' />
             <input
               className='w-full px-5 outline-none'
@@ -63,19 +63,19 @@ const Login = () => {
             />
           </div>
           <div className='flex mb-5'>
-            <h3 className='text-black text-opacity-70  font-semibold text-xl'>
+            <h3 className='text-xl font-semibold text-black text-opacity-70'>
               <Link to='/forgot-password'>Forgot Password</Link>
             </h3>
           </div>
-          <button type='submit' className='w-full bg-gray-500 text-white px-10 py-1 font-bold hover:bg-gray-800 duration-300'>Login</button>
-          <div className='flex items-center gap-10 justify-center mt-10'>
-            <FaFacebook className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
-            <FaGoogle className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
-            <FaTwitter className='text-2xl hover:text-blue-800 duration-200 cursor-pointer' />
+          <button type='submit' className='w-full px-10 py-1 font-bold text-white duration-300 bg-gray-500 hover:bg-gray-800'>Login</button>
+          <div className='flex items-center justify-center gap-10 mt-10'>
+            <FaFacebook className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
+            <FaGoogle className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
+            <FaTwitter className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
           </div>
           <div>
             <Link to="/signup">
-              <button className='w-full mt-5  text-black px-10 py-1 text-xl font-semibold hover:bg-gray-500 duration-300'>Create an Account</button>
+              <button className='w-full px-10 py-1 mt-5 text-xl font-semibold text-black duration-300 hover:bg-gray-500'>Create an Account</button>
             </Link>
           </div>
         </form>
