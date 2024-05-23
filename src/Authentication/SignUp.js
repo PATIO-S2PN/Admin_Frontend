@@ -36,16 +36,16 @@ const SignUp = () => {
                 body: JSON.stringify({
                     email: userDetails.email,
                     password: userDetails.password,
-                    phone: userDetails.position, // Assuming 'position' field as 'phone' for demonstration
-                    role: 'admin', // Assuming role, adjust as necessary
-                    profilePicture: '' // Assuming no picture, adjust as necessary
+                    phone: userDetails.position, 
+                    role: 'admin', 
+                    profilePicture: '' 
                 })
             });
 
             const data = await response.json();
             if (response.ok) {
                 alert('Signup successful, please check your email to verify.');
-                navigate('/login'); // Navigate to login page or dashboard as needed
+                navigate('/login'); 
             } else {
                 throw new Error(data.message || 'Failed to register');
             }
