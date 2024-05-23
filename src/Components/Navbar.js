@@ -4,6 +4,7 @@ import { BsArrowLeftShort, BsChevronDown } from 'react-icons/bs';
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { RiAdminFill, RiLoginBoxFill, RiNotificationFill } from "react-icons/ri";
 import { IoPeople } from "react-icons/io5";
+import profilepic from '../Assets/profile2.png';
 //import logo from '../Assets/logonew.svg'; // Make sure the path to your logo is correct
 
 const Navbar = () => {
@@ -58,17 +59,28 @@ const Navbar = () => {
   ];
 
   return (
-    <div className={`flex bg-gray-300 h-screen p-5 pt-8 ${open ? 'w-72' : 'w-20'} duration-300 relative `} >
+    <div className={`flex bg-orange-50 h-[100vh] p-5 pt-8 ${open ? 'w-72' : 'w-20'} duration-300 relative flex-col `} >
       <BsArrowLeftShort
-        className={`absolute mt-10 cursor-pointer rounded-full bg-white p-1 text-3xl text-black border border-black top-9 -right-3 ${!open && 'rotate-180'}`}
+        className={`absolute mt-10 cursor-pointer rounded-full bg-orange-200 p-1 text-3xl text-black border border-black top-9 -right-3 ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
       />
-      
+      <div className='flex flex-col justify-center'>
+        <img src={profilepic}
+      className={`w-24 h-24 mx-auto rounded-full ${!open && 'w-8 h-8'}`} alt="profilepic"
+      ></img>
+       {open && (
+        <>
+          <h1 className="text-lg text-center font-roboto">Welcome Back!</h1>
+          <p className='text-xl font-semibold text-center font-roboto'>Admin</p>
+        </>
+      )}
+      </div>
+        
      <ul className="pt-2 mt-10">
   {Menu.map((menu, index) => (
     <React.Fragment key={index}>
       <li
-        className={`flex items-center gap-x-4 cursor-pointer p-2.5 text-sm text-black hover:bg-gray-400 rounded-md ${menu.spacing ? 'mt-3' : 'mt-2'}`}
+        className={`flex items-center gap-x-4 cursor-pointer p-2.5 text-sm text-black hover:bg-orange-200 rounded-md ${menu.spacing ? 'mt-3' : 'mt-2'}`}
         onClick={() => menu.submenu && toggleSubmenu(menu.title)}
       >
         {menu.icon}
@@ -88,7 +100,7 @@ const Navbar = () => {
       {menu.submenu && activeSubmenu === menu.title && open && (
         <ul className="pl-12 space-y-2">
           {menu.submenuItems.map((submenuItem, submenuIndex) => (
-            <li key={submenuIndex} className="flex items-center gap-x-4 cursor-pointer p-2 px-5 py-0 text-sm text-black hover:bg-gray-400 rounded-md">
+            <li key={submenuIndex} className="flex items-center p-2 px-5 py-0 text-sm text-black rounded-md cursor-pointer gap-x-4 hover:bg-gray-400">
               <Link to={submenuItem.path} className="text-base font-medium">
                 {submenuItem.title}
               </Link>

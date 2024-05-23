@@ -22,9 +22,6 @@ import axios from 'axios';
 import SMembers from './Pages/SMembers';
 import PSetting from './Pages/PSetting';
 
-
-
-
 function App() {
   return (
     <div className="flex App">
@@ -43,18 +40,12 @@ function App() {
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/item" element={<Item />} />
             <Route path="/Cart" element={<Cart />} />
-
-             <Route path="/customer" element={<Customer/>}/>
-             <Route path="/cdetails" element={<CDetails/>}/>
-           <Route path="/orders" element={<Orders/>}/>
-             <Route path="/odetail" element={<ODetails/>}/>
-             <Route path="/smembers" element={<SMembers/>}/>
-             <Route path="/psetting" element={<PSetting/>}/>
-
-
-
-
-            
+            <Route path="/customer" element={<Customer/>}/>
+            <Route path="/cdetails" element={<CDetails/>}/>
+            <Route path="/orders" element={<Orders/>}/>
+            <Route path="/odetail" element={<ODetails/>}/>
+            <Route path="/smembers" element={<SMembers/>}/>
+            <Route path="/psetting" element={<PSetting/>}/>           
           </Routes>
         </div>
       </BrowserRouter>

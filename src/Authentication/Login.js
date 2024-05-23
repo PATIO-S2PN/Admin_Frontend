@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
-import { Link, useNavigate } from 'react-router-dom'; // Update this line
+import { Link, useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Updated to useNavigate
+  const navigate = useNavigate(); 
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,8 +22,8 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         console.log('Login successful:', data);
-        localStorage.setItem('token', data.token); // Save the token to local storage (or handle it as needed)
-        navigate('/dashboard'); // Updated to use navigate
+        localStorage.setItem('token', data.token); 
+        navigate('/dashboard'); 
       } else {
         throw new Error(data.message || 'Failed to login');
       }
