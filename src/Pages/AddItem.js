@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import logo from '../Assets/logonew.svg';
 
 const AddItem = () => {
   const [productDetails, setProductDetails] = useState({
@@ -69,42 +69,46 @@ const AddItem = () => {
 
   return (
     
-       <div className="w-full h-screen bg-gray-200 p-9">
-        <h1 className="text-4xl font-semibold">Add Item</h1>
+       <div className="w-full h-screen bg-white p-9 ">
+        <div>
+          <img src={logo} alt='logo' className='absolute z-10 h-[50px] w-[170px] top-8 right-10' onClick={() => navigate("/dashboard")} />
+          <h1 className="text-4xl font-semibold text-orange-800 top-10 font-roboto-regular">Add Item</h1>
+        </div>
+       
         <form className="py-10 mb-8" onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="images" className="block text-sm font-bold text-gray-700">Images</label>
-            <input type="file" multiple onChange={handleImageChange} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"/>
+            <label htmlFor="images" className="block text-sm font-semibold text-gray-900 font-roboto">Images</label>
+            <input type="file" multiple onChange={handleImageChange} className="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-violet-700 hover:file:bg-orange-200 fofnt-roboto"/>
             <div className="flex space-x-4">
               {imagePreview.map((src, index) => (
                 <img key={index} src={src} alt="Preview" className="w-20 h-20 rounded-lg shadow-lg"/>
               ))}
             </div>
           </div>
-          <div className='flex flex-row justify-between'>
+          <div className='flex flex-row justify-between my-2'>
             <div>
-              <label className="block text-sm font-bold text-gray-700" htmlFor="name">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto" htmlFor="name">
                 Name
               </label>
-              <input className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="Product Name" value={productDetails.name} onChange={handleInputChange} />
+              <input className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto bg-orange-50 hover:shadow-lg" id="name" name="name" type="text" placeholder="Product Name" value={productDetails.name} onChange={handleInputChange} />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700" htmlFor="description">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto" htmlFor="description">
                 Description
               </label>
-              <input className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="description" name="description" type="text" placeholder="Product Description" value={productDetails.description} onChange={handleInputChange} />
+              <input className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto bg-orange-50 hover:shadow-lg" id="description" name="description" type="text" placeholder="Product Description" value={productDetails.description} onChange={handleInputChange} />
             </div>
           </div>
 
           <div className='flex flex-row justify-between'>
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="category">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto" htmlFor="category">
                 Category
               </label>
               <select 
                 id="category" 
                 name="category" 
-                className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" 
+                className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto hover:shadow-lg bg-orange-50" 
                 value={productDetails.category} 
                 onChange={handleInputChange}
               >
@@ -120,13 +124,13 @@ const AddItem = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="foodType">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto" htmlFor="foodType">
                 Food Type
               </label>
               <select 
                 id="foodType" 
                 name="foodType" 
-                className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" 
+                className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline hover:shadow-lg text-sm font-roboto bg-orange-50" 
                 value={productDetails.foodType} 
                 onChange={handleInputChange}
               >
@@ -140,21 +144,21 @@ const AddItem = () => {
           
           <div className='flex flex-row justify-between'>
             <div>
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="readyTime">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto0" htmlFor="readyTime">
                 Ready Time
               </label>
-              <input className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="readyTime" name="readyTime" type="text" placeholder="Product Ready Time" value={productDetails.readyTime} onChange={handleInputChange} />
+              <input className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto bg-orange-50 hover:shadow-lg" id="readyTime" name="readyTime" type="text" placeholder="Product Ready Time" value={productDetails.readyTime} onChange={handleInputChange} />
             </div>
             <div>
-              <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="price">
+              <label className="block text-sm font-semibold text-gray-900 font-roboto" htmlFor="price">
                 Price
               </label>
-              <input className="w-[450px] px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="price" name="price" type="text" placeholder="Product Price" value={productDetails.price} onChange={handleInputChange} />
+              <input className="w-[450px] px-3 py-2 leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto bg-orange-50 hover:shadow-lg" id="price" name="price" type="text" placeholder="Product Price" value={productDetails.price} onChange={handleInputChange} />
             </div>
           </div>
           
-          <div className="flex items-center p-4 mt-5 space-x-10">
-            <button type="submit" className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 ">
+          <div className="flex items-center p-4 mt-5 ">
+            <button type="submit" className="px-4 py-2 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 w-[200px]">
               Submit
             </button>
           </div>
