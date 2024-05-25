@@ -2,6 +2,27 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../Assets/logonew.svg';
+import Swal from 'sweetalert2';
+
+function showToast(status, message) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    background: '#fff7ed',
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+  Toast.fire({
+    icon: status,
+    title: message
+  });
+}
 
 const AddItem = () => {
   const [productDetails, setProductDetails] = useState({
@@ -54,7 +75,7 @@ const AddItem = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://18.234.113.85/product/create', formData, {
+      const response = await axios.post('http://34.224.26.99/product/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` // Add this line
@@ -62,6 +83,8 @@ const AddItem = () => {
         },
       });
       console.log(response.data); // Handle the response as needed
+      showToast('success', 'Item is added Successfully!');
+
     } catch (error) {
       console.error(error); // Handle errors as needed
     }
