@@ -2,6 +2,27 @@ import React, { useState } from 'react';
 import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
 import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+function showToast(status, message) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    background: '#fff7ed',
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+  Toast.fire({
+    icon: status,
+    title: message
+  });
+}
 
 const SignUp = () => {
     const [userDetails, setUserDetails] = useState({
@@ -44,8 +65,10 @@ const SignUp = () => {
 
             const data = await response.json();
             if (response.ok) {
-                alert('Signup successful, please check your email to verify.');
-                navigate('/login'); 
+                showToast('success', 'Account is Created Successfully!');
+
+               // alert('Signup successful, please check your email to verify.');
+                navigate('/dashboard'); 
             } else {
                 throw new Error(data.message || 'Failed to register');
             }
@@ -56,46 +79,37 @@ const SignUp = () => {
     };
 
     return (
-        <div className='flex items-center justify-center min-h-screen bg-gray-100'>
-            <div className='w-full max-w-md p-10 bg-gray-200 rounded-lg shadow-lg'>
+        <div className='w-full h-screen bg-white p-9'>
+            <div className='w-full max-w-md'>
                 <form onSubmit={handleSignUp} className='space-y-4'>
-                    <div className='flex justify-center'>
-                        <img src={logo} alt="LuxeDine Logo" className="h-20 mb-4" />
-                    </div>
-                    <h2 className='text-2xl font-bold text-center text-gray-700'>Create Your Account</h2>
+                <img src={logo} alt='logo' className='absolute z-10 h-[50px] w-[170px] top-8 right-10' onClick={() => navigate("/dashboard")} />
+
+                <h1 className="text-4xl font-semibold text-orange-800 top-10 font-roboto-regular">Create New Account</h1>
                     <div>
-                        <label className='block mb-2 text-sm font-bold text-gray-700'>Name</label>
-                        <input className='w-full p-2 text-lg border rounded-md outline-none' type="text" placeholder='Your Name' name="name" value={userDetails.name} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label className='block mb-2 text-sm font-bold text-gray-700'>Email</label>
-                        <input className='w-full p-2 text-lg border rounded-md outline-none' type="email" placeholder='Your Email Address' name="email" value={userDetails.email} onChange={handleChange} />
+                        <label className='block text-sm font-semibold text-gray-900 font-roboto'>Name</label>
+                        <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type="text" placeholder='Your Name' name="name" value={userDetails.name} onChange={handleChange} />
                     </div>
                     <div>
-                        <label className='block mb-2 text-sm font-bold text-gray-700'>Position</label>
-                        <input className='w-full p-2 text-lg border rounded-md outline-none' type="text" placeholder='Your Position' name="position" value={userDetails.position} onChange={handleChange} />
+                        <label className='block text-sm font-semibold text-gray-900 font-roboto'>Email</label>
+                        <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type="email" placeholder='Your Email Address' name="email" value={userDetails.email} onChange={handleChange} />
                     </div>
                     <div>
-                        <label className='block mb-2 text-sm font-bold text-gray-700'>Create Password</label>
-                        <input className='w-full p-2 text-lg border rounded-md outline-none' type='password' placeholder='Enter the Password' name="password" value={userDetails.password} onChange={handleChange} />
+                        <label className='block text-sm font-semibold text-gray-900 font-roboto'>Position</label>
+                        <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type="text" placeholder='Your Position' name="position" value={userDetails.position} onChange={handleChange} />
                     </div>
                     <div>
-                        <label className='block mb-2 text-sm font-bold text-gray-700'>Confirm Password</label>
-                        <input className='w-full p-2 text-lg border rounded-md outline-none' type='password' placeholder='Confirm Password' name="confirmPassword" value={userDetails.confirmPassword} onChange={handleChange} />
+                        <label className='block text-sm font-semibold text-gray-900 font-roboto'>Create Password</label>
+                        <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type='password' placeholder='Enter the Password' name="password" value={userDetails.password} onChange={handleChange} />
                     </div>
-                    <button type='submit' className='w-full p-3 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600'>Create</button>
-                    <div className='text-center'>
-                        <span className='text-sm text-gray-600'>SignUp with</span>
+                    <div>
+                        <label className='block text-sm font-semibold text-gray-900 font-roboto'>Confirm Password</label>
+                        <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type='password' placeholder='Confirm Password' name="confirmPassword" value={userDetails.confirmPassword} onChange={handleChange} />
                     </div>
-                    <div className='flex justify-center space-x-4 text-2xl'>
-                        <FaFacebook className='cursor-pointer hover:text-blue-600' />
-                        <FaGoogle className='cursor-pointer hover:text-red-600' />
-                        <FaTwitter className='cursor-pointer hover:text-blue-400' />
-                    </div>
+                    <button type='submit' className='px-4 py-2 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 w-[200px]'>Create</button>
+                    
+                    
                 </form>
-                <div className='mt-4 text-center'>
-                    <p className='text-sm text-gray-600'>Already have an account? <Link to="/login" className='font-bold text-blue-500'>Login</Link></p>
-                </div>
+                
             </div>
         </div>
     );
