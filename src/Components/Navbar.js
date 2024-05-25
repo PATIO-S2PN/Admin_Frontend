@@ -5,11 +5,21 @@ import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { RiAdminFill, RiLoginBoxFill, RiNotificationFill } from "react-icons/ri";
 import { IoPeople } from "react-icons/io5";
 import profilepic from '../Assets/profile2.png';
-//import logo from '../Assets/logonew.svg'; // Make sure the path to your logo is correct
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
   const [activeSubmenu, setActiveSubmenu] = useState('');
+  const navigate = useNavigate();
+
+  //logout
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+     navigate('/');
+     console.log('Logout');
+  };
+
 
   const toggleSubmenu = (title) => {
     setActiveSubmenu(activeSubmenu === title ? '' : title);
@@ -55,11 +65,11 @@ const Navbar = () => {
     },
     { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true, submenu: false, submenuItems: [] },
     { title: "Settings & Privacy", icon: <AiFillSetting />,path: "/setting", submenu: false, submenuItems: [] },
-    { title: "Logout", icon: <RiLoginBoxFill />,path: "/", submenu: false, submenuItems: [] }
+    { title: "Logout", icon: <RiLoginBoxFill />,path: "/", submenu: false, submenuItems: [], onClick: handleLogout}
   ];
 
   return (
-    <div className={`flex bg-orange-50 h-[100vh] p-5 pt-8 ${open ? 'w-72' : 'w-20'} duration-300 relative flex-col `} >
+    <div className={`flex bg-orange-950 h-[100vh] p-5 pt-8 ${open ? 'w-72' : 'w-20'} duration-300 relative flex-col `} >
       <BsArrowLeftShort
         className={`absolute mt-10 cursor-pointer rounded-full bg-orange-200 p-1 text-3xl text-black border border-black top-9 -right-3 ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
@@ -70,8 +80,8 @@ const Navbar = () => {
       ></img>
        {open && (
         <>
-          <h1 className="text-lg text-center font-roboto">Welcome Back!</h1>
-          <p className='text-xl font-semibold text-center font-roboto'>Admin</p>
+          <h1 className="text-lg text-center font-roboto text-orange-50">Welcome Back!</h1>
+          <p className='text-xl font-semibold text-center font-roboto text-orange-50'>Admin</p>
         </>
       )}
       </div>
@@ -80,8 +90,14 @@ const Navbar = () => {
   {Menu.map((menu, index) => (
     <React.Fragment key={index}>
       <li
-        className={`flex items-center gap-x-4 cursor-pointer p-2.5 text-sm text-black hover:bg-orange-200 rounded-md ${menu.spacing ? 'mt-3' : 'mt-2'}`}
-        onClick={() => menu.submenu && toggleSubmenu(menu.title)}
+        className={`flex items-center gap-x-4 cursor-pointer p-2.5 text-sm text-orange-100 hover:bg-orange-200 hover:text-black rounded-md ${menu.spacing ? 'mt-3' : 'mt-2'}`}
+        onClick={() => {
+          if (menu.submenu) {
+            toggleSubmenu(menu.title);
+          } else if (menu.onClick) {
+            menu.onClick();
+          }
+        }}
       >
         {menu.icon}
         {menu.path && open ? (
@@ -100,8 +116,8 @@ const Navbar = () => {
       {menu.submenu && activeSubmenu === menu.title && open && (
         <ul className="pl-12 space-y-2">
           {menu.submenuItems.map((submenuItem, submenuIndex) => (
-            <li key={submenuIndex} className="flex items-center p-2 px-5 py-0 text-sm text-black rounded-md cursor-pointer gap-x-4 hover:bg-gray-400">
-              <Link to={submenuItem.path} className="text-base font-medium">
+            <li key={submenuIndex} className="flex items-center p-2 px-5 py-0 text-sm text-orange-100 rounded-md cursor-pointer gap-x-4 hover:bg-orange-200 hover:text-black">
+              <Link to={submenuItem.path} className="text-sm">
                 {submenuItem.title}
               </Link>
             </li>
