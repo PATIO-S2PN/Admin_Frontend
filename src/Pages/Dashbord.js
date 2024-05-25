@@ -2,7 +2,7 @@ import React from 'react';
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col min-h-screen p-4 mt-5 bg-white bg-opacity-88">
+    <div className="flex flex-col justify-between min-h-screen p-4 mt-5 bg-white bg-opacity-88">
       <header className="mx-10 mb-4">
         <h1 className="text-4xl font-semibold font-roboto-regular text-orange-950">Welcome Back!</h1>
         <h2 className="text-lg text-orange-800 font-roboto ">Here’s what’s going on at your business right now</h2>
