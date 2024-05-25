@@ -44,7 +44,9 @@ const Navbar = () => {
         { title: "Items", path: "/item" },
         { title: "Orders", path: "/orders" },
         { title: "Order Details", path: "/odetail" },
-        { title: "Create Accounts", path: "/signup" }
+        { title: "Create Accounts", path: "/signup" },
+        { title: "Chef-Details", path: "/chef-details" },
+        { title: "Gallery", path: "/gallery" }
 
         // Add more submenu items as needed
       ]
