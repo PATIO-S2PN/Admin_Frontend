@@ -18,12 +18,22 @@ import Setting from './Pages/Setting';
 import SMembers from './Pages/SMembers';
 import PSetting from './Pages/PSetting';
 import { useLocation } from 'react-router-dom';
+import Chef from "./Pages/Chef";
+import ChefDetails from './Pages/ChefDetails';
+import Gallery from './Pages/Gallery';
+import { ChefProvider } from './Components/ChefContext';
+import { GalleryProvider } from './Components/GalleryContext';
+
 
 function App() {
   return (
     <div className="flex App">
       <BrowserRouter>
-        <AppContent />
+        <ChefProvider>
+          <GalleryProvider>
+            <AppContent />
+          </GalleryProvider>
+        </ChefProvider>
       </BrowserRouter>
     </div>
   );
@@ -53,7 +63,10 @@ function AppContent() {
             <Route path="/orders" element={<Orders/>}/>
             <Route path="/odetail" element={<ODetails/>}/>
             <Route path="/smembers" element={<SMembers/>}/>
-            <Route path="/psetting" element={<PSetting/>}/>    
+            <Route path="/psetting" element={<PSetting/>}/>  
+            <Route path="/chef" element={<Chef/>}/>
+            <Route path="/chef-details" element={<ChefDetails/>}/>
+            <Route path="/gallery" element={<Gallery/>}/>  
           {/* ... other routes */}
         </Routes>
       </div>
