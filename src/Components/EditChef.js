@@ -1,17 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ChefContext } from '../Components/ChefContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ChefContext } from '../Components/ChefContext';
 
-const AddChef = () => {
-  const { addChef } = useContext(ChefContext);
+const EditChef = () => {
   const navigate = useNavigate();
-
+  const { state: chef } = useLocation();
+  const { updateChef } = useContext(ChefContext);
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    title: '',
-    photo: null,
+    name: chef.name,
+    description: chef.description,
+    title: chef.title,
+    photo: chef.photo
+    // Store the current photo URL
   });
 
   const handleChange = (e) => {
@@ -24,38 +25,38 @@ const AddChef = () => {
     setFormData({ ...formData, photo: file });
   };
 
-  const addnewChef = async (chef) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const formDataToSend = new FormData();
-    for (const key in chef) {
-      formDataToSend.append(key, chef[key]);
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('title', formData.title);
+    if (formData.photo) {
+      formDataToSend.append('photo', formData.photo);
+    } else {
+      formDataToSend.append('currentPhoto', formData.currentPhoto); // Append the current photo URL if no new photo is selected
     }
 
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post('http://34.224.26.99/admin/chef', formDataToSend, {
+      const response = await axios.put(`http://34.224.26.99/admin/chef/${chef._id}`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
 
-      const newChef = response.data;
-      addChef(newChef);
+      const updatedChef = response.data;
+      updateChef(updatedChef);
+      navigate('/chef-details');
     } catch (error) {
-      console.error(error.response.data);
-      throw new Error('Failed to add chef');
+      console.error('Failed to update chef:', error);
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await addnewChef(formData);
-    navigate('/chef-details');
   };
 
   return (
     <div className="w-full max-w-lg p-8 mx-auto mt-10 bg-orange-100 border-4 border-orange-900 rounded-md shadow-2xl shadow-slate-500">
-      <h2 className="mb-6 text-2xl font-bold text-center text-orange-800">Add New Chef</h2>
+      <h2 className="mb-6 text-2xl font-bold text-center text-orange-800">Edit Chef</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Name:</label>
@@ -91,6 +92,13 @@ const AddChef = () => {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700">Profile Picture:</label>
+          {formData.currentPhoto && (
+            <img
+              src={`http://34.224.26.99/admin/chefs/${formData.currentPhoto}`}
+              alt="Current Profile"
+              className="w-full h-64 mb-4 object-cover rounded-md"
+            />
+          )}
           <input
             type="file"
             name="photo"
@@ -99,11 +107,11 @@ const AddChef = () => {
           />
         </div>
         <button type="submit" className="w-full px-4 py-2 text-white bg-orange-800 rounded-md hover:bg-orange-900">
-          Add Chef
+          Save Changes
         </button>
       </form>
     </div>
   );
 };
 
-export default AddChef;
+export default EditChef;
