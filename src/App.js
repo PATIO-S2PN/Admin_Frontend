@@ -23,6 +23,7 @@ import ChefDetails from './Pages/ChefDetails';
 import Gallery from './Pages/Gallery';
 import { ChefProvider } from './Components/ChefContext';
 import { GalleryProvider } from './Components/GalleryContext';
+import EditChef from './Components/EditChef';
 
 
 function App() {
@@ -66,6 +67,7 @@ function AppContent() {
             <Route path="/psetting" element={<PSetting/>}/>  
             <Route path="/chef" element={<Chef/>}/>
             <Route path="/chef-details" element={<ChefDetails/>}/>
+            <Route path="/edit-chef" element={<EditChef />} />
             <Route path="/gallery" element={<Gallery/>}/>  
           {/* ... other routes */}
         </Routes>

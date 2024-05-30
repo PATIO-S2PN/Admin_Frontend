@@ -5,12 +5,16 @@ export const ChefContext = createContext();
 export const ChefProvider = ({ children }) => {
   const [chefs, setChefs] = useState([]);
 
-  const addChef = (newChef) => {
-    setChefs([...chefs, newChef]);
+  const addChef = (chef) => {
+    setChefs([...chefs, chef]);
+  };
+
+  const updateChef = (updatedChef) => {
+    setChefs(chefs.map(chef => (chef._id === updatedChef._id ? updatedChef : chef)));
   };
 
   return (
-    <ChefContext.Provider value={{ chefs, addChef }}>
+    <ChefContext.Provider value={{ chefs, setChefs, addChef, updateChef }}>
       {children}
     </ChefContext.Provider>
   );
