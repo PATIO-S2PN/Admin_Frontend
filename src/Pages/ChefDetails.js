@@ -5,6 +5,7 @@ import { ChefContext } from '../Components/ChefContext';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import img from '../Assets/chef4.png';
 
 const ChefDetails = () => {
   //const { chefs } = useContext(ChefContext);
@@ -89,9 +90,10 @@ const ChefDetails = () => {
               </div> */}
               <div className="mb-4">
                 <img
-                src={`http://34.224.26.99/admin/chefs/${chef.photo}`}
-                className="object-cover object-center w-full h-full"
-                alt={chef.name}
+                  src={
+                    chef.photo ? `http://34.224.26.99/admin/${chef.photo}` : img} 
+                  className="object-cover object-center w-full h-full"
+                  alt={chef.name}
                 />              
               </div>
             </div>
