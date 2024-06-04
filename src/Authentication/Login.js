@@ -34,6 +34,13 @@ const Login = () => {
     }
   };
 
+  //login is working on enter key press
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      handleLogin(event);
+    }
+  }
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
@@ -51,6 +58,7 @@ const Login = () => {
               type="email"
               placeholder='Ex: john@gmail.com'
               value={email}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -61,6 +69,7 @@ const Login = () => {
               type='password'
               placeholder='Enter the Password'
               value={password}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
