@@ -24,6 +24,7 @@ import Gallery from './Pages/Gallery';
 import { ChefProvider } from './Components/ChefContext';
 import { GalleryProvider } from './Components/GalleryContext';
 import EditChef from './Components/EditChef';
+import EditProfile from './Pages/EditProfile';
 
 
 function App() {
@@ -55,6 +56,7 @@ function AppContent() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ChangePassword />} />
             <Route path="/notification" element={<Notification />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/setting" element={<Setting />} />
             <Route path="/addItem" element={<AddItem />} />
             <Route path="/item" element={<Item />} />

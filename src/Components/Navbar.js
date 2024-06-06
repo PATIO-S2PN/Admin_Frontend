@@ -67,9 +67,10 @@ const Navbar = () => {
         // Define submenu items for Customer
       ]
     },
-    { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true, submenu: false, submenuItems: [] },
-    { title: "Settings & Privacy", icon: <AiFillSetting />,path: "/setting", submenu: false, submenuItems: [] },
-    { title: "Logout", icon: <RiLoginBoxFill />,path: "/", submenu: false, submenuItems: [], onClick: handleLogout}
+    { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true  },
+    { title: "Settings & Privacy", icon: <AiFillSetting />,path: "/setting"},
+    { title: "Edit Profile", icon: <AiFillSetting />,path: "/edit-profile"},
+    { title: "Logout", icon: <RiLoginBoxFill />,path: "/",  onClick: handleLogout}
   ];
 
   return (
