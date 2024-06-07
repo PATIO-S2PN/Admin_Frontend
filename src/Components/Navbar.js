@@ -68,7 +68,7 @@ const Navbar = () => {
       ]
     },
     { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true  },
-    { title: "Settings & Privacy", icon: <AiFillSetting />,path: "/setting"},
+    { title: "Payment Settings", icon: <AiFillSetting />,path: "/psetting"},
     { title: "Edit Profile", icon: <AiFillSetting />,path: "/edit-profile"},
     { title: "Logout", icon: <RiLoginBoxFill />,path: "/",  onClick: handleLogout}
   ];

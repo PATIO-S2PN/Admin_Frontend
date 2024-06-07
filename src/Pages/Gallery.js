@@ -3,6 +3,7 @@ import axios from 'axios';
 import { GalleryContext } from '../Components/GalleryContext';
 import Swal from 'sweetalert2';
 import { FaEllipsisV } from 'react-icons/fa';
+import logo from '../Assets/logonew.svg';
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -160,7 +161,10 @@ const RestaurantGallery = () => {
 
   return (
     <div className="w-full h-auto bg-white p-9">
-      <h1 className="text-4xl text-orange-800 font-semibold mb-6">Restaurant Gallery</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-4xl text-orange-800 font-semibold">Restaurant Gallery</h1>
+        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' />
+      </div>
       <form onSubmit={editingIndex !== null ? handleUpdatePhoto : handleAddPhotos}>
         <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center">
           <input 

@@ -1,6 +1,7 @@
-// Notifications.js
 import React, { useState } from 'react';
 import NotificationList from '../Components/NotificationList';
+import { useNavigate } from 'react-router-dom';
+import logo from '../Assets/logonew.svg';
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState([
@@ -23,6 +24,8 @@ const Notifications = () => {
         // ... more notifications
     ]);
 
+    const navigate = useNavigate();
+
     // Define the toggleReadStatus function
     const toggleReadStatus = (id) => {
         const updatedNotifications = notifications.map((notification) => {
@@ -35,8 +38,11 @@ const Notifications = () => {
     };
 
     return (
-        <div className="container mx-auto p-6 bg-gray-200 h-screen">
-            <h1 className="text-4xl font-bold mb-4">Notifications</h1>
+        <div className="container mx-auto p-6 bg-white h-screen">
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-4xl text-orange-900 font-bold">Notifications</h1>
+                <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
+            </div>
             <NotificationList notifications={notifications} onToggleReadStatus={toggleReadStatus} />
         </div>
     );
