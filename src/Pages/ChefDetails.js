@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
+import img from '../Assets/chef4.png';
 import { ChefContext } from '../Components/ChefContext';
 
 const ChefDetails = () => {
@@ -90,7 +91,7 @@ const ChefDetails = () => {
         </button>
       </div>
       {chefs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+        <div className="grid grid-cols-1 gap-6 mt-10 md:grid-cols-2 lg:grid-cols-3">
           {chefs.map((chef, index) => (
             <div key={chef._id} className="relative p-4 bg-orange-100 rounded-lg shadow-md">
               <div className="absolute top-4 right-4" ref={el => dropdownRefs.current[index] = el}>
@@ -133,6 +134,17 @@ const ChefDetails = () => {
               </div>
               <div className="mb-2">
                 <strong>Title:</strong> {chef.title}
+              </div>
+              {/* <div className="mb-4">
+                <strong>Contact Number:</strong> {chef.contact}
+              </div> */}
+              <div className="mb-4">
+                <img
+                  src={
+                    chef.photo ? `http://34.224.26.99/admin/${chef.photo}` : img} 
+                  className="object-cover object-center w-full h-full"
+                  alt={chef.name}
+                />              
               </div>
             </div>
           ))}

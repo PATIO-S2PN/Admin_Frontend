@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://34.224.26.99/admin/login', {
+      const response = await fetch('http://localhost:8004/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,6 +34,13 @@ const Login = () => {
     }
   };
 
+  //login is working on enter key press
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      handleLogin(event);
+    }
+  }
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
@@ -51,6 +58,7 @@ const Login = () => {
               type="email"
               placeholder='Ex: john@gmail.com'
               value={email}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -61,6 +69,7 @@ const Login = () => {
               type='password'
               placeholder='Enter the Password'
               value={password}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
