@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AdminCustomerPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -24,10 +26,14 @@ const AdminCustomerPage = () => {
     setSearchQuery(e.target.value);
   };
 
+  const handleRowClick = (order) => {
+    navigate('/odetail', { state: { order } });
+  };
+
   const filteredOrders = orders.filter(order =>
     order.orderId && order.orderId.toLowerCase().includes(searchQuery.toLowerCase())
   );
-  
+
   return (
     <div className="p-4">
       <h1 className="mb-4 text-3xl font-bold">Order</h1>
@@ -39,7 +45,7 @@ const AdminCustomerPage = () => {
             placeholder="Search orders..."
             value={searchQuery}
             onChange={handleSearchInputChange}
-            className="w-full p-2 bg-gray-300 border border-gray-300 rounded-l-md"
+            className="w-full p-2 bg-gray-300 border border-gray-300 rounded-l-md hover:bg-gray-500"
           />
         </div>
       </div>
@@ -62,7 +68,11 @@ const AdminCustomerPage = () => {
             </thead>
             <tbody>
               {filteredOrders.map(order => (
-                <tr key={order.orderId}>
+                <tr 
+                  key={order.orderId}
+                  onClick={() => handleRowClick(order)}
+                  className="cursor-pointer hover:bg-gray-200"
+                >
                   <td className="p-2 text-center bg-gray-300">{order.orderId}</td>
                   <td className="p-2 text-center bg-gray-300">{order.amount}</td>
                   <td className="p-2 text-center bg-gray-300">{order.customerId}</td>
