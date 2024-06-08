@@ -44,13 +44,13 @@ const Login = () => {
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
-    style={{ backgroundImage: `url(${bg})` }}>
+      style={{ backgroundImage: `url(${bg})` }}>
       <div className='flex items-center justify-center flex-1 mb-5 text-3xl text-center'>
-        <form className='w-2/5 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 p-14 shadow-slate-500' onSubmit={handleLogin}>
+        <form className='w-full max-w-lg p-8 mx-4 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 sm:p-10 md:p-12 lg:p-14 shadow-slate-500' onSubmit={handleLogin}>
           <div className='flex items-center justify-center mb-5'>
-            <img src={logo} alt="Logo" className="h-20" />
+            <img src={logo} alt="Logo" className="h-12 sm:h-16 md:h-20" />
           </div>
-          <p className='mb-5 text-2xl text-center text-orange-700 font-roboto '>Login to continue</p>
+          <p className='mb-5 text-xl text-center text-orange-700 sm:text-2xl font-roboto '>Login to continue</p>
           <div className='flex items-center h-10 p-2 mb-5 text-xl border-2 border-gray-300 rounded-md bg-orange-50'>
             <FaUser className='text-2xl text-black' />
             <input
@@ -62,7 +62,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className='flex items-center h-10 p-2 text-xl border-2 rounded-md bg-orange-50'>
+          <div className='flex items-center h-10 p-2 mb-5 text-xl border-2 rounded-md bg-orange-50'>
             <FaLock className='text-2xl text-black' />
             <input
               className='w-full px-5 text-sm outline-none font-roboto bg-orange-50'
@@ -78,16 +78,11 @@ const Login = () => {
               <Link to='/forgot-password'>Forgot Password</Link>
             </h3>
           </div>
-          <button type='submit' className='w-full px-10 py-1 text-lg font-semibold text-white duration-300 bg-orange-900 rounded-lg hover:bg-gray-800 font-roboto'>Login</button>
-          <div className='flex items-center justify-center gap-10 mt-10'>
+          <button type='submit' className='w-full px-4 py-2 text-lg font-semibold text-white duration-300 bg-orange-900 rounded-lg hover:bg-gray-800 font-roboto'>Login</button>
+          {/* <div className='flex items-center justify-center gap-4 mt-10'>
             <FaFacebook className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
             <FaGoogle className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
             <FaTwitter className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-          </div>
-          {/* <div>
-            <Link to="/signup">
-              <button className='w-full px-10 py-1 mt-5 text-xl font-semibold text-black duration-300 hover:bg-gray-500'>Create an Account</button>
-            </Link>
           </div> */}
         </form>
       </div>
