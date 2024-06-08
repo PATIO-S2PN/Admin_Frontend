@@ -1,80 +1,118 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import logo from '../Assets/logonew.svg';
 
-const Item = () => {
-  
- 
+function showToast(status, message) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    background: '#fff7ed',
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+
+  Toast.fire({
+    icon: status,
+    title: message
+  });
+}
+
+const Items = () => {
+  const [items, setItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://34.224.26.99/products', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setItems(response.data);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+        showToast('error', 'Failed to fetch items');
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  const filteredItems = items.filter(item =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="flex">
-    
-
-      <div className="p-9 w-full h-screen bg-gray-200">
-        <h1 className="text-4xl font-semibold">Items</h1>
-
-        <div class="flex items-center justify-between px-4 py-2 space-x-4">
-  
-  <div class="flex-1 ">
-    <input type="text" placeholder="Search Items" class="w-full px-4 py-2 border rounded-lg" />
-  </div>
-  
-  
-  <button class="px-4 py-2 text-sm bg-gray-300 rounded-lg hover:bg-gray-500">
-    Export
-  </button>
-
- 
-  <button class="flex items-center px-4 py-2 text-sm bg-gray-300 rounded-lg hover:bg-gray-500">
-    Add Item
-    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-  </button>
-</div>
-
-<table class="w-full mt-10 space-y-5 px-4 table-fixed border-collapse">
-  <thead>
-    <tr>
-      <th class= "text-center">Item</th>
-      <th class="text-center">Item Name</th>
-      <th class="text-center">Price</th>
-      <th class="text-center">Category</th>
-      <th class="text-center">Size</th>
-      <th class="text-center">Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="bg-gray-100 mt-10 align-center space-y-3 odd:bg-gray-200">
-      <td class="text-center mt-10"> </td>
-      <td class="text-center mt-10">Burger</td>
-      <td class="text-center">2$</td>
-      <td class="text-center">Snacks</td>
-      <td class="text-center">Medium</td>
-      <td class="text-center">04/01/2023</td>
-    </tr>
-    <tr class="bg-gray-100 align-center odd:bg-gray-200">
-      <td class="text-center"> </td>
-      <td class="text-center">Submarine</td>
-      <td class="text-center">3.5$</td>
-      <td class="text-center">Music</td>
-      <td class="text-center">Large</td>
-      <td class="text-center">08/01/2023</td>
-    </tr>
-    <tr class="bg-gray-100 align-center odd:bg-gray-200">
-      <td class="text-center"> </td>
-      <td class="text-center">Milkshake</td>
-      <td class="text-center">3$</td>
-      <td class="text-center">Music</td>
-      <td class="text-center">No</td>
-      <td class="text-center">01/01/2024</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-      
-
-
+    <div className="min-h-screen bg-white p-4 sm:p-9">
+      <div className="flex justify-between items-center mb-4 sm:mb-8">
+        <h1 className="text-4xl font-semibold text-orange-800 font-roboto-regular">Items</h1>
+        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
+      </div>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-8 space-y-4 sm:space-y-0">
+        <input
+          type="text"
+          placeholder="Search items..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full sm:w-1/2 px-3 py-2 text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline text-sm font-roboto bg-orange-50 hover:shadow-lg"
+        />
+        <button
+          onClick={() => navigate('/addItem')}
+          className="px-4 py-2 font-bold text-white bg-orange-800 rounded hover:bg-orange-700"
+        >
+          Add Item
+        </button>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr className="bg-orange-700 text-white">
+              <th className="py-2 px-4 border-b">Name</th>
+              <th className="py-2 px-4 border-b">Description</th>
+              <th className="py-2 px-4 border-b">Category</th>
+              <th className="py-2 px-4 border-b">Food Type</th>
+              <th className="py-2 px-4 border-b">Ready Time</th>
+              <th className="py-2 px-4 border-b">Price</th>
+              <th className="py-2 px-4 border-b">Rating</th>
+              <th className="py-2 px-4 border-b">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredItems.map((item) => (
+              <tr key={item._id}>
+                <td className="py-2 px-4 border-b">{item.name}</td>
+                <td className="py-2 px-4 border-b">{item.description}</td>
+                <td className="py-2 px-4 border-b">{item.category}</td>
+                <td className="py-2 px-4 border-b">{item.foodType}</td>
+                <td className="py-2 px-4 border-b">{item.readyTime}</td>
+                <td className="py-2 px-4 border-b">{item.price}</td>
+                <td className="py-2 px-4 border-b">{item.rating}</td>
+                <td className="py-2 px-4 border-b">
+                  <button
+                    className="text-blue-600 hover:underline"
+                    onClick={() => navigate(`/edit-item/${item._id}`)}
+                  >
+                    Edit
+                  </button>
+                  {/* Add delete functionality if needed */}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
-}
+};
 
-export default Item;
+export default Items;
