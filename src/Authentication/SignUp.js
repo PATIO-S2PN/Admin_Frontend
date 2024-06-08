@@ -70,7 +70,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('http://34.224.26.99/admin/signup', {
+      const response = await fetch('http://localhost:8004/signup', {
         method: 'POST',
         body: formData
       });
@@ -89,9 +89,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className='w-full h-screen bg-cover bg-center flex items-center justify-center ' >
-      <div className='bg-orange-100 bg-opacity-90 p-6 rounded-lg shadow-lg w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8 border border-orange-900'>
-        <div className='w-full  max-w-md'>
+    <div className='flex items-center justify-center w-full h-screen bg-center bg-cover ' >
+      <div className='flex flex-col items-center w-full max-w-4xl p-6 mx-auto space-y-6 bg-orange-100 border border-orange-900 rounded-lg shadow-lg bg-opacity-90 md:flex-row md:items-start md:space-y-0 md:space-x-8'>
+        <div className='w-full max-w-md'>
           <form onSubmit={handleSignUp} className='space-y-4'>
             <img src={logo} alt='logo' className='absolute z-10 h-[50px] w-[170px] top-8 right-10 cursor-pointer' onClick={() => navigate("/dashboard")} />
 
@@ -124,20 +124,20 @@ const SignUp = () => {
               <label className='block text-sm font-semibold text-gray-900 font-roboto'>Confirm Password</label>
               <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type='password' placeholder='Confirm Password' name="confirmPassword" value={userDetails.confirmPassword} onChange={handleChange} required />
             </div>
-            <button type='submit' className='px-4 py-2 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 w-full md:w-auto'>Create</button>
+            <button type='submit' className='w-full px-4 py-2 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 md:w-auto'>Create</button>
           </form>
         </div>
-        <div className='w-full max-w-xs flex flex-col items-center'>
-          <div className='w-48  h-48 mb-4'>
+        <div className='flex flex-col items-center w-full max-w-xs'>
+          <div className='w-48 h-48 mb-4'>
             {userDetails.profilePicture ? (
-              <img src={URL.createObjectURL(userDetails.profilePicture)} alt='Profile Preview' className='w-full h-full object-cover rounded-full' />
+              <img src={URL.createObjectURL(userDetails.profilePicture)} alt='Profile Preview' className='object-cover w-full h-full rounded-full' />
             ) : (
-              <div className='w-full h-full flex items-center justify-center bg-orange-200 rounded-full'>
-                <FaUser className='text-gray-500 text-6xl' />
+              <div className='flex items-center justify-center w-full h-full bg-orange-200 rounded-full'>
+                <FaUser className='text-6xl text-gray-500' />
               </div>
             )}
           </div>
-          <label className='block text-sm font-semibold  text-orange-900 font-roboto'>Profile Picture</label>
+          <label className='block text-sm font-semibold text-orange-900 font-roboto'>Profile Picture</label>
           <input type='file' name='profilePicture' accept='image/*' onChange={handleChange} className='mt-2' />
         </div>
       </div>

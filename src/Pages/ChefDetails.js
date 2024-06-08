@@ -2,13 +2,8 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
-<<<<<<< HEAD
-import { useEffect } from 'react';
-import { useState } from 'react';
 import img from '../Assets/chef4.png';
-=======
 import { ChefContext } from '../Components/ChefContext';
->>>>>>> 6b998f903d66d5d3a004bb3d781b2452768ff1a4
 
 const ChefDetails = () => {
   const navigate = useNavigate();
@@ -96,7 +91,7 @@ const ChefDetails = () => {
         </button>
       </div>
       {chefs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+        <div className="grid grid-cols-1 gap-6 mt-10 md:grid-cols-2 lg:grid-cols-3">
           {chefs.map((chef, index) => (
             <div key={chef._id} className="relative p-4 bg-orange-100 rounded-lg shadow-md">
               <div className="absolute top-4 right-4" ref={el => dropdownRefs.current[index] = el}>
@@ -140,7 +135,6 @@ const ChefDetails = () => {
               <div className="mb-2">
                 <strong>Title:</strong> {chef.title}
               </div>
-<<<<<<< HEAD
               {/* <div className="mb-4">
                 <strong>Contact Number:</strong> {chef.contact}
               </div> */}
@@ -152,8 +146,6 @@ const ChefDetails = () => {
                   alt={chef.name}
                 />              
               </div>
-=======
->>>>>>> 6b998f903d66d5d3a004bb3d781b2452768ff1a4
             </div>
           ))}
         </div>
