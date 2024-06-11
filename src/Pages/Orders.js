@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import logo from '../Assets/logonew.svg';
 
 const AdminCustomerPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -36,8 +37,15 @@ const AdminCustomerPage = () => {
 
   return (
     <div className="p-4">
-      <h1 className="mb-4 text-3xl font-bold">Order</h1>
-
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-3xl text-orange-900 font-bold">Orders</h1>
+        <img 
+          src={logo} 
+          alt="logo" 
+          className="h-[50px] w-[170px] cursor-pointer"
+          onClick={() => navigate("/dashboard")}
+        />
+      </div>
       <div className="flex items-center mb-4">
         <div className="flex-1 mr-2">
           <input
@@ -45,7 +53,7 @@ const AdminCustomerPage = () => {
             placeholder="Search orders..."
             value={searchQuery}
             onChange={handleSearchInputChange}
-            className="w-full p-2 bg-gray-300 border border-gray-300 rounded-l-md hover:bg-gray-500"
+            className="w-1/2 p-2 bg-orange-100 border border-gray-500 rounded-l-md hover:bg-orange-200"
           />
         </div>
       </div>
