@@ -6,7 +6,7 @@ export const GalleryProvider = ({ children }) => {
   const [images, setImages] = useState([]);
 
   const addImages = (newImages) => {
-    setImages([...images, ...newImages]);
+    setImages(prevImages => [...prevImages, ...newImages]);
   };
 
   return (

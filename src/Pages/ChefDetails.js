@@ -4,6 +4,7 @@ import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
 import img from '../Assets/chef4.png';
 import { ChefContext } from '../Components/ChefContext';
+import logo from '../Assets/logonew.svg';
 
 const ChefDetails = () => {
   const navigate = useNavigate();
@@ -74,10 +75,12 @@ const ChefDetails = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-white p-9" onClick={handleOutsideClick}>
-      <div className="flex items-center justify-between">
+    <div className="w-full h-auto bg-white p-9">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-4xl font-semibold text-orange-800">Chef Details</h1>
-        
+        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
+      </div>
+      <div className="flex items-center justify-between mb-4">
         <div className="w-1/2 basis-full md:basis-auto md:flex md:items-center">
           <div className="relative w-full">
             <BsSearch className="absolute text-lg text-black transform -translate-y-1/2 cursor-pointer left-3 top-1/2" />

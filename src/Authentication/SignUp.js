@@ -95,7 +95,7 @@ const SignUp = () => {
           <form onSubmit={handleSignUp} className='space-y-4'>
             <img src={logo} alt='logo' className='absolute z-10 h-[50px] w-[170px] top-8 right-10 cursor-pointer' onClick={() => navigate("/dashboard")} />
 
-            <h1 className="text-4xl font-semibold text-orange-800 top-10 font-roboto-regular">Create New Account</h1>
+            <h1 className="text-3xl font-semibold text-orange-800 top-10 font-roboto-regular">Create a  New Account</h1>
             <div>
               <label className='block text-sm font-semibold text-gray-900 font-roboto'>Name</label>
               <input className='w-full px-3 py-2 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type="text" placeholder='Your Name' name="name" value={userDetails.name} onChange={handleChange} required />
