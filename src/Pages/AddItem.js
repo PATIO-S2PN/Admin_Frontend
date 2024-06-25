@@ -75,7 +75,7 @@ const AddItem = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://localhost:8002/product/create', formData, {
+      const response = await axios.post('http://localhost:8003/product/create', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` // Add this line

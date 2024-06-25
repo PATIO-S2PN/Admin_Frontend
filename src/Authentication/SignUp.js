@@ -70,7 +70,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8004/signup', {
+      const response = await fetch('http://localhost:8002/signup', {
         method: 'POST',
         body: formData
       });
