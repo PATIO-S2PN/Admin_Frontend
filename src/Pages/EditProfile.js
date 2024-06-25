@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { adminBackendUrl } from '../config';
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -38,7 +39,7 @@ const EditProfile = () => {
     // Fetch user data from the server
     const fetchData = async () => {
       try {
-        const response = await fetch('http://34.224.26.99/admin/profile');
+        const response = await fetch(`${adminBackendUrl}/profile`);
         const data = await response.json();
         if (response.ok) {
           setUserDetails({
@@ -88,7 +89,7 @@ const EditProfile = () => {
     }
 
     try {
-      const response = await fetch('http://34.224.26.99/admin/profile', {
+      const response = await fetch(`${adminBackendUrl}/profile`, {
         method: 'PUT',
         body: formData
       });
@@ -107,11 +108,11 @@ const EditProfile = () => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-orange-50'>
-      <div className='bg-orange-100 bg-opacity-90 p-8 md:p-12 rounded-lg shadow-lg w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12 border border-orange-900'>
+    <div className='flex items-center justify-center min-h-screen bg-orange-50'>
+      <div className='flex flex-col items-center w-full max-w-5xl p-8 mx-auto space-y-8 bg-orange-100 border border-orange-900 rounded-lg shadow-lg bg-opacity-90 md:p-12 md:flex-row md:items-start md:space-y-0 md:space-x-12'>
         <div className='w-full md:w-2/3'>
           <form onSubmit={handleUpdate} className='space-y-6'>
-            <h1 className="text-4xl md:text-5xl font-semibold text-orange-800 font-roboto-regular">Edit Profile</h1>
+            <h1 className="text-4xl font-semibold text-orange-800 md:text-5xl font-roboto-regular">Edit Profile</h1>
             <div>
               <label className='block text-sm font-semibold text-gray-900 font-roboto'>Name</label>
               <input className='w-full px-4 py-3 text-sm leading-tight text-gray-900 border rounded shadow appearance-none focus:outline-none focus:shadow-outline font-roboto bg-orange-50 hover:shadow-lg' type="text" placeholder='Your Name' name="name" value={userDetails.name} onChange={handleChange} required />
@@ -132,20 +133,20 @@ const EditProfile = () => {
                 <option value="Staff">Staff</option>
               </select>
             </div>
-            <button type='submit' className='px-6 py-3 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 w-full md:w-auto'>Update</button>
+            <button type='submit' className='w-full px-6 py-3 font-bold text-white bg-orange-800 rounded hover:bg-orange-700 md:w-auto'>Update</button>
           </form>
         </div>
-        <div className='w-full md:w-1/3 flex flex-col items-center'>
-          <div className='w-52 h-52 mb-4'>
+        <div className='flex flex-col items-center w-full md:w-1/3'>
+          <div className='mb-4 w-52 h-52'>
             {userDetails.profilePicture ? (
               typeof userDetails.profilePicture === 'string' ? (
-                <img src={userDetails.profilePicture} alt='Profile' className='w-full h-full object-cover rounded-full' />
+                <img src={userDetails.profilePicture} alt='Profile' className='object-cover w-full h-full rounded-full' />
               ) : (
-                <img src={URL.createObjectURL(userDetails.profilePicture)} alt='Profile Preview' className='w-full h-full object-cover rounded-full' />
+                <img src={URL.createObjectURL(userDetails.profilePicture)} alt='Profile Preview' className='object-cover w-full h-full rounded-full' />
               )
             ) : (
-              <div className='w-full h-full flex items-center justify-center bg-orange-200 rounded-full'>
-                <FaUser className='text-gray-500 text-6xl' />
+              <div className='flex items-center justify-center w-full h-full bg-orange-200 rounded-full'>
+                <FaUser className='text-6xl text-gray-500' />
               </div>
             )}
           </div>

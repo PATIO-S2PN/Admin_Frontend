@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChefContext } from '../Components/ChefContext';
 import axios from 'axios';
+import { adminBackendUrl } from '../config';
 
 const AddChef = () => {
   const { addChef } = useContext(ChefContext);
@@ -33,7 +34,7 @@ const AddChef = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.post('http://34.224.26.99/admin/chef', formDataToSend, {
+      const response = await axios.post(`${adminBackendUrl}/chef`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

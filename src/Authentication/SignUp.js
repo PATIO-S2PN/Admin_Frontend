@@ -3,6 +3,7 @@ import { FaUser } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { adminBackendUrl } from '../config';
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -70,7 +71,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8002/signup', {
+      const response = await fetch(`${adminBackendUrl}/signup`, {
         method: 'POST',
         body: formData
       });

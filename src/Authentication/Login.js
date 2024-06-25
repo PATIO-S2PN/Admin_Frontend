@@ -3,6 +3,7 @@ import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa'
 import logo from '../Assets/logonew.svg';
 import { Link, useNavigate } from 'react-router-dom'; 
 import bg from '../Assets/adminlogin.jpg';
+import { adminBackendUrl } from '../config';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8002/login', {
+      const response = await fetch(`${adminBackendUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

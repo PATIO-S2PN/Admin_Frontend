@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../Assets/logonew.svg';
 import Swal from 'sweetalert2';
+import { productBackendUrl } from '../config';
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -75,7 +76,7 @@ const AddItem = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://localhost:8003/product/create', formData, {
+      const response = await axios.post(`${productBackendUrl}/product/create`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}` // Add this line

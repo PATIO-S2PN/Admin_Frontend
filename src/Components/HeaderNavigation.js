@@ -4,6 +4,7 @@ import bell from '../Assets/Bell-off.svg'
 import menuicon from '../Assets/Chevron-down.png'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { adminBackendUrl } from '../config';
 
 const Header_Navigation = () => {
     const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
@@ -20,7 +21,7 @@ const Header_Navigation = () => {
           setIsLoading(true);
           try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:8002/profile', {
+            const response = await axios.get(`${adminBackendUrl}/profile`, {
               headers: {
                   'Authorization': `Bearer ${token}`          },
             });
@@ -46,7 +47,7 @@ const Header_Navigation = () => {
         />
         <div className='flex flex-row justify-between w-[72px] items-center'>
             <img 
-                src={profile.profilePicture ? `http://localhost:8002/${profile.profilePicture.replace("\\", "/")}` : profilepic}
+                src={profile.profilePicture ? `${adminBackendUrl}/${profile.profilePicture.replace("\\", "/")}` : profilepic}
                 alt='profile'
                 className='h-[40px] w-[40px] ' 
             />
