@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import logo from '../Assets/logonew.svg';
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -25,7 +24,38 @@ function showToast(status, message) {
 }
 
 const Items = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([
+    {
+      _id: '1',
+      name: 'Burger',
+      description: 'Juicy grilled burger with cheese',
+      category: 'Burgers',
+      foodType: 'Non-Vegetarian',
+      readyTime: '10 mins',
+      price: '$5.99',
+      rating: '4.5'
+    },
+    {
+      _id: '2',
+      name: 'Vegan Salad',
+      description: 'Fresh mixed greens with a light vinaigrette',
+      category: 'Salads',
+      foodType: 'Vegan',
+      readyTime: '5 mins',
+      price: '$4.99',
+      rating: '4.8'
+    },
+    {
+      _id: '3',
+      name: 'Margherita Pizza',
+      description: 'Classic pizza with tomatoes and mozzarella',
+      category: 'Pizza',
+      foodType: 'Vegetarian',
+      readyTime: '15 mins',
+      price: '$8.99',
+      rating: '4.7'
+    }
+  ]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -55,8 +85,7 @@ const Items = () => {
   return (
     <div className="min-h-screen bg-white p-4 sm:p-9">
       <div className="flex justify-between items-center mb-4 sm:mb-8">
-        <h1 className="text-4xl font-semibold text-orange-800 font-roboto-regular">Items</h1>
-        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
+        <h1 className="text-2xl sm:text-4xl font-semibold text-orange-800 font-roboto-regular">Items</h1>
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-8 space-y-4 sm:space-y-0">
         <input
@@ -84,7 +113,6 @@ const Items = () => {
               <th className="py-2 px-4 border-b">Ready Time</th>
               <th className="py-2 px-4 border-b">Price</th>
               <th className="py-2 px-4 border-b">Rating</th>
-              <th className="py-2 px-4 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -97,15 +125,6 @@ const Items = () => {
                 <td className="py-2 px-4 border-b">{item.readyTime}</td>
                 <td className="py-2 px-4 border-b">{item.price}</td>
                 <td className="py-2 px-4 border-b">{item.rating}</td>
-                <td className="py-2 px-4 border-b">
-                  <button
-                    className="text-blue-600 hover:underline"
-                    onClick={() => navigate(`/edit-item/${item._id}`)}
-                  >
-                    Edit
-                  </button>
-                  {/* Add delete functionality if needed */}
-                </td>
               </tr>
             ))}
           </tbody>

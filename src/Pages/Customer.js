@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from '../Assets/logonew.svg';
 
 const Customer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,26 +18,25 @@ const Customer = () => {
     <div className="p-4">
       <div className="flex justify-between mt-4 items-center mb-4">
         <h1 className="text-3xl text-orange-800 font-bold">Customers</h1>
-        <img src={logo} alt="Logo" className="h-[50px] w-[170px] cursor-pointer" />
       </div>
 
       <div className="flex items-center mb-4">
-        <div className="flex-1 mr-2">
+        <div className="w-full md:w-1/2 mr-2">
           <input
             type="text"
             placeholder="Search customers by ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-orange-100 p-2 border border-gray-500 rounded-l-md w-1/2"
+            className="bg-orange-100 p-2 border border-gray-500 rounded-md w-full"
           />
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 overflow-x-auto">
         {filteredCustomers.length === 0 ? (
           <p>No customers found with the provided ID.</p>
         ) : (
-          <table className="w-full bg-orange-700  border-collapse border">
+          <table className="w-full bg-orange-700 border-collapse border">
             <thead>
               <tr>
                 <th className="p-2 text-white">ID</th>

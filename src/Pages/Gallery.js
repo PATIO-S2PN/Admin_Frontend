@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GalleryContext } from '../Components/GalleryContext';
 import Swal from 'sweetalert2';
 import { FaEllipsisV } from 'react-icons/fa';
-import logo from '../Assets/logonew.svg';
+
 
 function showToast(status, message) {
   const Toast = Swal.mixin({
@@ -160,35 +160,34 @@ const RestaurantGallery = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-white p-9">
+    <div className="min-h-screen bg-white p-4 md:p-9">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-4xl text-orange-800 font-semibold">Restaurant Gallery</h1>
-        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' />
+        <h1 className="text-2xl md:text-4xl font-semibold text-orange-800">Restaurant Gallery</h1>
       </div>
       <form onSubmit={editingIndex !== null ? handleUpdatePhoto : handleAddPhotos}>
         <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center">
           <input 
             type="file" 
             onChange={handleFileChange} 
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4"
+            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4"
+            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4"
+            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
           />
           <button 
             type="submit" 
-            className="py-2 px-4 bg-orange-900 text-white rounded-md hover:bg-orange-700"
+            className="py-2 px-4 bg-orange-900 text-white rounded-md hover:bg-orange-700 w-full sm:w-auto"
             disabled={uploading}>
             {uploading ? 'Uploading...' : editingIndex !== null ? 'Update Photo' : 'Add Photo'}
           </button>

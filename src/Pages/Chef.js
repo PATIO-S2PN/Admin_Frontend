@@ -54,7 +54,7 @@ const AddChef = () => {
   };
 
   return (
-    <div className="w-full max-w-lg p-8 mx-auto mt-10 bg-orange-100 border-4 border-orange-900 rounded-md shadow-2xl shadow-slate-500">
+    <div className="w-full max-w-lg p-8 mx-auto mt-10 bg-orange-100 border-4 justify-center  border-orange-900 rounded-md shadow-2xl shadow-slate-500">
       <h2 className="mb-6 text-2xl font-bold text-center text-orange-800">Add New Chef</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

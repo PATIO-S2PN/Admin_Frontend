@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../Assets/logonew.svg';
+
 // import customerImage from '../Assets/customerImage.jpg'; // Add the path to your customer image
 
 const CustomerDetailsPage = () => {
@@ -7,12 +7,11 @@ const CustomerDetailsPage = () => {
     <div className="p-4">
       <div className="flex justify-between items-center mt-4 mb-4">
         <h1 className="text-3xl text-orange-800 font-bold mb-4">Customer Details</h1>
-        <img src={logo} alt="Logo" className="h-[50px] w-[170px] cursor-pointer" />
       </div>
       
-      <div className="flex mb-4">
-        <button className="bg-orange-100 border border-orange-800 hover:bg-orange-200 font-bold text-black px-4 py-2 mr-2">Reset Password</button>
-        <button className="bg-red-800 border border-orange-800 hover:bg-orange-200 font-bold text-white px-4 py-2">Delete Account</button>
+      <div className="flex flex-wrap mb-4">
+        <button className="bg-orange-100 border border-orange-800 hover:bg-orange-200 font-bold text-black px-4 py-2 mr-2 mb-2 lg:mb-0">Reset Password</button>
+        <button className="bg-red-800 border border-orange-800 hover:bg-orange-200 font-bold text-white px-4 py-2 mb-2 lg:mb-0">Delete Account</button>
       </div>
 
       <div className="flex justify-center mb-7">
@@ -48,45 +47,47 @@ const CustomerDetailsPage = () => {
 
       <div className="w-full">
         <h1 className="text-2xl text-orange-800 font-bold mb-4">Order History</h1>
-        <table className="w-full border-collapse border">
-          <thead>
-            <tr>
-              <th className="p-2 bg-orange-700 text-white border">Order</th>
-              <th className="p-2 bg-orange-700 text-white border">Total</th>
-              <th className="p-2 bg-orange-700 text-white border">Payment Status</th>
-              <th className="p-2 bg-orange-700 text-white border">Order Status</th>
-              <th className="p-2 bg-orange-700 text-white border">Branch</th>
-              <th className="p-2 bg-orange-700 text-white border">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="bg-orange-200 p-2 text-center border">#123</td>
-              <td className="bg-orange-200 p-2 text-center border">$87</td>
-              <td className="bg-orange-200 p-2 text-center border">
-                <button className="bg-green-700 border border-white text-white px-2 py-1 rounded-md">Complete</button>
-              </td>
-              <td className="bg-orange-200 p-2 text-center border">
-                <button className="bg-yellow-700 border border-white text-white px-2 py-1 rounded-md">Done</button>
-              </td>
-              <td className="bg-orange-200 p-2 text-center border">Colombo</td>
-              <td className="bg-orange-200 p-2 text-center border">12/10/2023</td>
-            </tr>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border">
+            <thead>
+              <tr>
+                <th className="p-2 bg-orange-700 text-white border">Order</th>
+                <th className="p-2 bg-orange-700 text-white border">Total</th>
+                <th className="p-2 bg-orange-700 text-white border">Payment Status</th>
+                <th className="p-2 bg-orange-700 text-white border">Order Status</th>
+                <th className="p-2 bg-orange-700 text-white border">Branch</th>
+                <th className="p-2 bg-orange-700 text-white border">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="bg-orange-200 p-2 text-center border">#123</td>
+                <td className="bg-orange-200 p-2 text-center border">$87</td>
+                <td className="bg-orange-200 p-2 text-center border">
+                  <button className="bg-green-700 border border-white text-white px-2 py-1 rounded-md">Complete</button>
+                </td>
+                <td className="bg-orange-200 p-2 text-center border">
+                  <button className="bg-yellow-700 border border-white text-white px-2 py-1 rounded-md">Done</button>
+                </td>
+                <td className="bg-orange-200 p-2 text-center border">Colombo</td>
+                <td className="bg-orange-200 p-2 text-center border">12/10/2023</td>
+              </tr>
 
-            <tr>
-              <td className="bg-orange-200 p-2 text-center border">#123</td>
-              <td className="bg-orange-200 p-2 text-center border">$87</td>
-              <td className="bg-orange-200 p-2 text-center border">
-                <button className="bg-green-700 border border-white text-white px-2 py-1 rounded-md">Complete</button>
-              </td>
-              <td className="bg-orange-200 p-2 text-center border">
-                <button className="bg-yellow-700 border border-white text-white px-2 py-1 rounded-md">Done</button>
-              </td>
-              <td className="bg-orange-200 p-2 text-center border">Colombo</td>
-              <td className="bg-orange-200 p-2 text-center border">12/10/2023</td>
-            </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td className="bg-orange-200 p-2 text-center border">#124</td>
+                <td className="bg-orange-200 p-2 text-center border">$100</td>
+                <td className="bg-orange-200 p-2 text-center border">
+                  <button className="bg-green-700 border border-white text-white px-2 py-1 rounded-md">Complete</button>
+                </td>
+                <td className="bg-orange-200 p-2 text-center border">
+                  <button className="bg-yellow-700 border border-white text-white px-2 py-1 rounded-md">Done</button>
+                </td>
+                <td className="bg-orange-200 p-2 text-center border">Colombo</td>
+                <td className="bg-orange-200 p-2 text-center border">14/11/2023</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
