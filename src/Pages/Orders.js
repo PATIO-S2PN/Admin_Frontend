@@ -1,27 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { NotificationContext } from './NotificationContext';
+import { shoppingBackendUrl } from '../config';
 
 
 const AdminCustomerPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [orders, setOrders] = useState([]);
+  const { addNotification } = useContext(NotificationContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    axios.get('http://localhost:8005/orders/all', {
+    axios.get(`${shoppingBackendUrl}/orders/all`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
     .then(response => {
-      setOrders(response.data);
-      console.log(response.data);
+      const newOrders = response.data;
+      if (orders.length && newOrders.length > orders.length) {
+        addNotification({
+          id: new Date().getTime(),
+          title: 'New Order',
+          message: `Order #${newOrders[newOrders.length - 1].orderId} has been placed.`,
+          timestamp: new Date().toISOString(),
+          link: `/order/${newOrders[newOrders.length - 1].orderId}`,
+          read: false,
+        });
+      }
+      setOrders(newOrders);
+      console.log(newOrders);
     })
     .catch(error => console.error('Error:', error));
-  }, []);
+  }, [orders, addNotification]);
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);

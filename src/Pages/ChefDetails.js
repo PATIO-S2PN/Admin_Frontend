@@ -5,6 +5,7 @@ import axios from 'axios';
 import img from '../Assets/chef4.png';
 import { ChefContext } from '../Components/ChefContext';
 
+import { adminBackendUrl } from '../config';
 
 const ChefDetails = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const ChefDetails = () => {
   const getAllChefs = () => {
     const token = localStorage.getItem('token');
 
-    axios.get('http://34.224.26.99/admin/chefs', {
+    axios.get(`${adminBackendUrl}/chefs`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -52,7 +53,7 @@ const ChefDetails = () => {
   const handleDelete = async (chefId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://34.224.26.99/admin/chef/${chefId}`, {
+      await axios.delete(`${adminBackendUrl}/chef/${chefId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -76,7 +77,7 @@ const ChefDetails = () => {
 
   return (
     <div className="min-h-screen bg-white p-4 md:p-9">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl md:text-4xl font-semibold text-orange-800">Chef Details</h1>
         
       </div>
@@ -123,7 +124,7 @@ const ChefDetails = () => {
               {chef.photo && (
                 <div className="mb-4">
                   <img
-                    src={`http://34.224.26.99/admin/chefs/${chef.photo}`}
+                    src={`${adminBackendUrl}/chefs/${chef.photo}`}
                     alt="Chef Profile"
                     className="object-cover w-full h-64 rounded-md"
                   />
@@ -140,7 +141,7 @@ const ChefDetails = () => {
               </div>
               <div className="mb-4">
                 <img
-                  src={chef.photo ? `http://34.224.26.99/admin/${chef.photo}` : img}
+                  src={chef.photo ? `${adminBackendUrl}/${chef.photo}` : img}
                   className="object-cover object-center w-full h-full rounded-md"
                   alt={chef.name}
                 />              
