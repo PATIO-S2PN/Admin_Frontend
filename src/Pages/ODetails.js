@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+import { shoppingBackendUrl } from '../config';
 
 const CustomerDetailsPage = () => {
   const location = useLocation();
@@ -9,11 +11,11 @@ const CustomerDetailsPage = () => {
   const [orderStatus, setOrderStatus] = useState(order.status || 'preparing');
   const [inputBgClass, setInputBgClass] = useState('bg-green-300');
 
-  const handleStatusChange = (event) => {
-    const status = event.target.value;
-    setOrderStatus(status);
+  const handleStatusChange = async (event) => {
+    const newStatus = event.target.value;
+    //setOrderStatus(newStatus);
 
-    switch (status) {
+    switch (newStatus) {
       case 'preparing':
         setInputBgClass('bg-green-300');
         break;
@@ -25,6 +27,33 @@ const CustomerDetailsPage = () => {
         break;
       default:
         setInputBgClass('');
+    }
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+  
+      // Assuming `order.orderId` correctly holds the order's ID
+      const orderId = order.orderId;
+      const response = await axios.patch(`/order/${orderId}/status`, { newStatus }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (response.status === 200) {
+        console.log('Order status updated successfully');
+        // Assuming `setOrderStatus` updates the local state to reflect the new status
+        setOrderStatus(newStatus);
+        // Update `inputBgClass` based on `newStatus` if necessary
+      } else {
+        console.error('Failed to update order status', response.data);
+      }
+    } catch (error) {
+      console.error('Error updating order status:', error.response ? error.response.data : error.message);
     }
   };
 
@@ -47,10 +76,10 @@ const CustomerDetailsPage = () => {
             value={orderStatus}
             onChange={handleStatusChange}
           >
-            <option className='font-bold bg-orange-500' value="received">Reveived</option>
-            <option className='font-bold bg-yellow-300' value="preparing">Processing</option>
-            <option className='font-bold bg-green-500' value="get_ready">Get Ready</option>
-            <option className='font-bold bg-green-500' value="cancelled">Cancelled</option>
+            <option className='font-bold bg-orange-500' value="received">Received</option>
+            <option className='font-bold bg-yellow-300' value="preparing">Preparing</option>
+            <option className='font-bold bg-green-500' value="get_ready">Ready</option>
+            {/* <option className='font-bold bg-green-500' value="cancelled">Cancelled</option> */}
 
           </select>
         </div>
