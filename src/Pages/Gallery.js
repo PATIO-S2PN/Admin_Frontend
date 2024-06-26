@@ -3,6 +3,8 @@ import axios from 'axios';
 import { GalleryContext } from '../Components/GalleryContext';
 import Swal from 'sweetalert2';
 import { FaEllipsisV } from 'react-icons/fa';
+import logo from '../Assets/logonew.svg';
+import { adminBackendUrl } from '../config';
 
 
 function showToast(status, message) {
@@ -69,7 +71,7 @@ const RestaurantGallery = () => {
       formData.append('name', name);
       formData.append('description', description);
 
-      const response = await axios.post('http://34.224.26.99/admin/gallery', formData, {
+      const response = await axios.post(`${adminBackendUrl}/gallery`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -118,7 +120,7 @@ const RestaurantGallery = () => {
       }
 
       const image = images[editingIndex];
-      await axios.put(`http://34.224.26.99/admin/gallery/${image.id}`, formData, {
+      await axios.put(`${adminBackendUrl}/gallery/${image.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -149,7 +151,7 @@ const RestaurantGallery = () => {
   const handleDelete = async (index) => {
     try {
       const image = images[index];
-      await axios.delete(`http://34.224.26.99/admin/gallery/${image.id}`);
+      await axios.delete(`${adminBackendUrl}/gallery/${image.id}`);
       const updatedImages = images.filter((_, i) => i !== index);
       setImages(updatedImages);
       showToast('success', 'Photo deleted successfully');
@@ -160,44 +162,44 @@ const RestaurantGallery = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-4 md:p-9">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl md:text-4xl font-semibold text-orange-800">Restaurant Gallery</h1>
+    <div className="min-h-screen p-4 bg-white md:p-9">
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-semibold text-orange-800 md:text-4xl">Restaurant Gallery</h1>
       </div>
       <form onSubmit={editingIndex !== null ? handleUpdatePhoto : handleAddPhotos}>
-        <div className="mb-4 flex flex-col sm:flex-row items-start sm:items-center">
+        <div className="flex flex-col items-start mb-4 sm:flex-row sm:items-center">
           <input 
             type="file" 
             onChange={handleFileChange} 
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="py-2 px-4 bg-orange-200 border rounded-md mb-2 sm:mb-0 sm:mr-4 w-full sm:w-auto"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <button 
             type="submit" 
-            className="py-2 px-4 bg-orange-900 text-white rounded-md hover:bg-orange-700 w-full sm:w-auto"
+            className="w-full px-4 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-700 sm:w-auto"
             disabled={uploading}>
             {uploading ? 'Uploading...' : editingIndex !== null ? 'Update Photo' : 'Add Photo'}
           </button>
         </div>
       </form>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {images.map((image, index) => (
-          <div key={index} className="bg-orange-100 p-4 shadow-md rounded-lg relative">
-            <img src={image.src} alt={`Gallery item ${index}`} className="w-full h-48 object-cover rounded-md" />
-            <h2 className="text-xl text-orange-800 font-semibold mt-2">{image.name}</h2>
+          <div key={index} className="relative p-4 bg-orange-100 rounded-lg shadow-md">
+            <img src={image.src} alt={`Gallery item ${index}`} className="object-cover w-full h-48 rounded-md" />
+            <h2 className="mt-2 text-xl font-semibold text-orange-800">{image.name}</h2>
             <p className="text-sm text-gray-600">{image.description}</p>
             <div className="absolute top-2 right-2" ref={dropdownRef}>
               <button
@@ -207,14 +209,14 @@ const RestaurantGallery = () => {
                 <FaEllipsisV />
               </button>
               {dropdownOpen === index && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                <div className="absolute right-0 z-10 w-48 mt-2 bg-white rounded-md shadow-lg">
                   <button 
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" 
                     onClick={() => handleEdit(index)}>
                     Edit
                   </button>
                   <button 
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" 
+                    className="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100" 
                     onClick={() => handleDelete(index)}>
                     Delete
                   </button>

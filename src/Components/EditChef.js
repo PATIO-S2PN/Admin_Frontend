@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ChefContext } from '../Components/ChefContext';
+import { adminBackendUrl } from '../config';
 
 const EditChef = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const EditChef = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.put(`http://34.224.26.99/admin/chef/${chef._id}`, formDataToSend, {
+      const response = await axios.put(`${adminBackendUrl}/chef/${chef._id}`, formDataToSend, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -94,9 +95,9 @@ const EditChef = () => {
           <label className="block text-gray-700">Profile Picture:</label>
           {formData.currentPhoto && (
             <img
-              src={`http://34.224.26.99/admin/chefs/${formData.currentPhoto}`}
+              src={`${adminBackendUrl}/chefs/${formData.currentPhoto}`}
               alt="Current Profile"
-              className="w-full h-64 mb-4 object-cover rounded-md"
+              className="object-cover w-full h-64 mb-4 rounded-md"
             />
           )}
           <input
