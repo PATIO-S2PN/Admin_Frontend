@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
+import React, { useState, useContext } from 'react';
+import { FaUser, FaLock } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import bg from '../Assets/adminlogin.jpg';
 import { adminBackendUrl } from '../config';
+import { AuthContext } from '../AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -24,8 +25,7 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         console.log('Login successful:', data);
-        localStorage.setItem('token', data.token); 
-        navigate('/dashboard'); 
+        login(data.token); // Use the login function from AuthContext
       } else {
         throw new Error(data.message || 'Failed to login');
       }
@@ -35,19 +35,23 @@ const Login = () => {
     }
   };
 
-  //login is working on enter key press
   const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
+    if (event.key === 'Enter') {
       event.preventDefault();
       handleLogin(event);
     }
-  }
+  };
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
-      style={{ backgroundImage: `url(${bg})` }}>
+    <div
+      className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className='flex items-center justify-center flex-1 mb-5 text-3xl text-center'>
-        <form className='w-full max-w-lg p-8 mx-4 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 sm:p-10 md:p-12 lg:p-14 shadow-slate-500' onSubmit={handleLogin}>
+        <form
+          className='w-full max-w-lg p-8 mx-4 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 sm:p-10 md:p-12 lg:p-14 shadow-slate-500'
+          onSubmit={handleLogin}
+        >
           <div className='flex items-center justify-center mb-5'>
             <img src={logo} alt="Logo" className="h-12 sm:h-16 md:h-20" />
           </div>
@@ -80,15 +84,10 @@ const Login = () => {
             </h3>
           </div>
           <button type='submit' className='w-full px-4 py-2 text-lg font-semibold text-white duration-300 bg-orange-900 rounded-lg hover:bg-gray-800 font-roboto'>Login</button>
-          {/* <div className='flex items-center justify-center gap-4 mt-10'>
-            <FaFacebook className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-            <FaGoogle className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-            <FaTwitter className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-          </div> */}
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
