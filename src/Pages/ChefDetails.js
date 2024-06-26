@@ -7,6 +7,7 @@ import { ChefContext } from '../Components/ChefContext';
 import logo from '../Assets/logonew.svg';
 import { adminBackendUrl } from '../config';
 
+
 const ChefDetails = () => {
   const navigate = useNavigate();
   const [chefs, setChefs] = useState([]);
@@ -80,9 +81,13 @@ const ChefDetails = () => {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-4xl font-semibold text-orange-800">Chef Details</h1>
         <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
-      </div>
+    <div className="min-h-screen p-4 bg-white md:p-9">
       <div className="flex items-center justify-between mb-4">
-        <div className="w-1/2 basis-full md:basis-auto md:flex md:items-center">
+        <h1 className="text-2xl font-semibold text-orange-800 md:text-4xl">Chef Details</h1>
+        
+      </div>
+      <div className="flex flex-col items-center justify-between mb-4 md:flex-row">
+        <div className="w-full mb-4 md:w-1/2 md:mb-0">
           <div className="relative w-full">
             <BsSearch className="absolute text-lg text-black transform -translate-y-1/2 cursor-pointer left-3 top-1/2" />
             <input type="text" placeholder="Search " className="w-full px-4 py-2 pl-10 bg-orange-200 border rounded-lg" />
@@ -90,7 +95,7 @@ const ChefDetails = () => {
         </div>
         <button 
           onClick={() => navigate('/chef')} 
-          className="px-8 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-600">
+          className="px-6 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-600">
           Add Chef
         </button>
       </div>
@@ -139,14 +144,11 @@ const ChefDetails = () => {
               <div className="mb-2">
                 <strong>Title:</strong> {chef.title}
               </div>
-              {/* <div className="mb-4">
-                <strong>Contact Number:</strong> {chef.contact}
-              </div> */}
               <div className="mb-4">
                 <img
                   src={
                     chef.photo ? `${adminBackendUrl}/${chef.photo}` : img} 
-                  className="object-cover object-center w-full h-full"
+                  className="object-cover object-center w-full h-full rounded-md"
                   alt={chef.name}
                 />              
               </div>
@@ -157,6 +159,8 @@ const ChefDetails = () => {
         <div className="mt-10 text-xl text-center">No chef details available. Please add a chef first.</div>
       )}
     </div>
+  </div>
+</div>
   );
 };
 

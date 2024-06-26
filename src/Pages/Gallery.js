@@ -6,6 +6,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
 import { adminBackendUrl } from '../config';
 
+
 function showToast(status, message) {
   const Toast = Swal.mixin({
     toast: true,
@@ -161,35 +162,34 @@ const RestaurantGallery = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-white p-9">
+    <div className="min-h-screen p-4 bg-white md:p-9">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-4xl font-semibold text-orange-800">Restaurant Gallery</h1>
-        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' />
+        <h1 className="text-2xl font-semibold text-orange-800 md:text-4xl">Restaurant Gallery</h1>
       </div>
       <form onSubmit={editingIndex !== null ? handleUpdatePhoto : handleAddPhotos}>
         <div className="flex flex-col items-start mb-4 sm:flex-row sm:items-center">
           <input 
             type="file" 
             onChange={handleFileChange} 
-            className="px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <input 
             type="text"
             placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4"
+            className="w-full px-4 py-2 mb-2 bg-orange-200 border rounded-md sm:mb-0 sm:mr-4 sm:w-auto"
           />
           <button 
             type="submit" 
-            className="px-4 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-700"
+            className="w-full px-4 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-700 sm:w-auto"
             disabled={uploading}>
             {uploading ? 'Uploading...' : editingIndex !== null ? 'Update Photo' : 'Add Photo'}
           </button>
