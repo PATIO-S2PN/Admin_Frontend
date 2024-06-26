@@ -4,7 +4,7 @@ import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
 import img from '../Assets/chef4.png';
 import { ChefContext } from '../Components/ChefContext';
-import logo from '../Assets/logonew.svg';
+
 
 const ChefDetails = () => {
   const navigate = useNavigate();
@@ -75,13 +75,13 @@ const ChefDetails = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-white p-9">
+    <div className="min-h-screen bg-white p-4 md:p-9">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-4xl font-semibold text-orange-800">Chef Details</h1>
-        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
+        <h1 className="text-2xl md:text-4xl font-semibold text-orange-800">Chef Details</h1>
+        
       </div>
-      <div className="flex items-center justify-between mb-4">
-        <div className="w-1/2 basis-full md:basis-auto md:flex md:items-center">
+      <div className="flex flex-col md:flex-row items-center justify-between mb-4">
+        <div className="w-full md:w-1/2 mb-4 md:mb-0">
           <div className="relative w-full">
             <BsSearch className="absolute text-lg text-black transform -translate-y-1/2 cursor-pointer left-3 top-1/2" />
             <input type="text" placeholder="Search " className="w-full px-4 py-2 pl-10 bg-orange-200 border rounded-lg" />
@@ -89,7 +89,7 @@ const ChefDetails = () => {
         </div>
         <button 
           onClick={() => navigate('/chef')} 
-          className="px-8 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-600">
+          className="px-6 py-2 text-white bg-orange-900 rounded-md hover:bg-orange-600">
           Add Chef
         </button>
       </div>
@@ -138,14 +138,10 @@ const ChefDetails = () => {
               <div className="mb-2">
                 <strong>Title:</strong> {chef.title}
               </div>
-              {/* <div className="mb-4">
-                <strong>Contact Number:</strong> {chef.contact}
-              </div> */}
               <div className="mb-4">
                 <img
-                  src={
-                    chef.photo ? `http://34.224.26.99/admin/${chef.photo}` : img} 
-                  className="object-cover object-center w-full h-full"
+                  src={chef.photo ? `http://34.224.26.99/admin/${chef.photo}` : img}
+                  className="object-cover object-center w-full h-full rounded-md"
                   alt={chef.name}
                 />              
               </div>

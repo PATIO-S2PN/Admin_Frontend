@@ -60,8 +60,8 @@ const Navbar = () => {
         { title: "Home Page", path: "/customer" },
         { title: "Customers", path: "/customer" },
         { title: "Customer Details", path: "/cdetails" },
-        { title: "Cart", path: "/cart" },
-        { title: "Checkout", path: "/checkout" },
+        
+        
         
         
         // Define submenu items for Customer
