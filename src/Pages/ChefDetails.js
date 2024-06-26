@@ -4,9 +4,8 @@ import { BsSearch, BsThreeDotsVertical } from 'react-icons/bs';
 import axios from 'axios';
 import img from '../Assets/chef4.png';
 import { ChefContext } from '../Components/ChefContext';
-import logo from '../Assets/logonew.svg';
-import { adminBackendUrl } from '../config';
 
+import { adminBackendUrl } from '../config';
 
 const ChefDetails = () => {
   const navigate = useNavigate();
@@ -77,10 +76,6 @@ const ChefDetails = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-white p-9">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-4xl font-semibold text-orange-800">Chef Details</h1>
-        <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' onClick={() => navigate("/dashboard")} />
     <div className="min-h-screen p-4 bg-white md:p-9">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-semibold text-orange-800 md:text-4xl">Chef Details</h1>
@@ -146,8 +141,7 @@ const ChefDetails = () => {
               </div>
               <div className="mb-4">
                 <img
-                  src={
-                    chef.photo ? `${adminBackendUrl}/${chef.photo}` : img} 
+                  src={chef.photo ? `${adminBackendUrl}/${chef.photo}` : img}
                   className="object-cover object-center w-full h-full rounded-md"
                   alt={chef.name}
                 />              
@@ -159,8 +153,6 @@ const ChefDetails = () => {
         <div className="mt-10 text-xl text-center">No chef details available. Please add a chef first.</div>
       )}
     </div>
-  </div>
-</div>
   );
 };
 
