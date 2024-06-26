@@ -44,7 +44,9 @@ const Navbar = () => {
         { title: "Items", path: "/item" },
         { title: "Orders", path: "/orders" },
         { title: "Order Details", path: "/odetail" },
-        { title: "Create Accounts", path: "/signup" }
+        { title: "Create Accounts", path: "/signup" },
+        { title: "Chef-Details", path: "/chef-details" },
+        { title: "Gallery", path: "/gallery" }
 
         // Add more submenu items as needed
       ]
@@ -58,16 +60,17 @@ const Navbar = () => {
         { title: "Home Page", path: "/customer" },
         { title: "Customers", path: "/customer" },
         { title: "Customer Details", path: "/cdetails" },
-        { title: "Cart", path: "/cart" },
-        { title: "Checkout", path: "/checkout" },
+        
+        
         
         
         // Define submenu items for Customer
       ]
     },
-    { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true, submenu: false, submenuItems: [] },
-    { title: "Settings & Privacy", icon: <AiFillSetting />,path: "/setting", submenu: false, submenuItems: [] },
-    { title: "Logout", icon: <RiLoginBoxFill />,path: "/", submenu: false, submenuItems: [], onClick: handleLogout}
+    { title: "Notification", icon: <RiNotificationFill />,  path: "/notification",spacing: true  },
+    { title: "Payment Settings", icon: <AiFillSetting />,path: "/psetting"},
+    { title: "Edit Profile", icon: <AiFillSetting />,path: "/edit-profile"},
+    { title: "Logout", icon: <RiLoginBoxFill />,path: "/",  onClick: handleLogout}
   ];
 
   return (

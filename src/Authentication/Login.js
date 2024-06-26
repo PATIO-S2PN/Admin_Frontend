@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import { FaUser, FaLock, FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
+import React, { useState, useContext } from 'react';
+import { FaUser, FaLock } from 'react-icons/fa';
 import logo from '../Assets/logonew.svg';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import bg from '../Assets/adminlogin.jpg';
+import { adminBackendUrl } from '../config';
+import { AuthContext } from '../AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://34.224.26.99/admin/login', {
+      const response = await fetch(`${adminBackendUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,8 +25,7 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         console.log('Login successful:', data);
-        localStorage.setItem('token', data.token); 
-        navigate('/dashboard'); 
+        login(data.token); // Use the login function from AuthContext
       } else {
         throw new Error(data.message || 'Failed to login');
       }
@@ -34,16 +35,27 @@ const Login = () => {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleLogin(event);
+    }
+  };
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
-    style={{ backgroundImage: `url(${bg})` }}>
+    <div
+      className='flex items-center justify-center min-h-screen bg-fixed bg-center bg-no-repeat bg-cover'
+      style={{ backgroundImage: `url(${bg})` }}
+    >
       <div className='flex items-center justify-center flex-1 mb-5 text-3xl text-center'>
-        <form className='w-2/5 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 p-14 shadow-slate-500' onSubmit={handleLogin}>
+        <form
+          className='w-full max-w-lg p-8 mx-4 border-2 border-orange-900 shadow-2xl bg-orange-50 rounded-2xl bg-opacity-70 sm:p-10 md:p-12 lg:p-14 shadow-slate-500'
+          onSubmit={handleLogin}
+        >
           <div className='flex items-center justify-center mb-5'>
-            <img src={logo} alt="Logo" className="h-20" />
+            <img src={logo} alt="Logo" className="h-12 sm:h-16 md:h-20" />
           </div>
-          <p className='mb-5 text-2xl text-center text-orange-700 font-roboto '>Login to continue</p>
+          <p className='mb-5 text-xl text-center text-orange-700 sm:text-2xl font-roboto '>Login to continue</p>
           <div className='flex items-center h-10 p-2 mb-5 text-xl border-2 border-gray-300 rounded-md bg-orange-50'>
             <FaUser className='text-2xl text-black' />
             <input
@@ -51,16 +63,18 @@ const Login = () => {
               type="email"
               placeholder='Ex: john@gmail.com'
               value={email}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className='flex items-center h-10 p-2 text-xl border-2 rounded-md bg-orange-50'>
+          <div className='flex items-center h-10 p-2 mb-5 text-xl border-2 rounded-md bg-orange-50'>
             <FaLock className='text-2xl text-black' />
             <input
               className='w-full px-5 text-sm outline-none font-roboto bg-orange-50'
               type='password'
               placeholder='Enter the Password'
               value={password}
+              onKeyPress={handleKeyPress}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -69,21 +83,11 @@ const Login = () => {
               <Link to='/forgot-password'>Forgot Password</Link>
             </h3>
           </div>
-          <button type='submit' className='w-full px-10 py-1 text-lg font-semibold text-white duration-300 bg-orange-900 rounded-lg hover:bg-gray-800 font-roboto'>Login</button>
-          <div className='flex items-center justify-center gap-10 mt-10'>
-            <FaFacebook className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-            <FaGoogle className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-            <FaTwitter className='text-2xl duration-200 cursor-pointer hover:text-blue-800' />
-          </div>
-          {/* <div>
-            <Link to="/signup">
-              <button className='w-full px-10 py-1 mt-5 text-xl font-semibold text-black duration-300 hover:bg-gray-500'>Create an Account</button>
-            </Link>
-          </div> */}
+          <button type='submit' className='w-full px-4 py-2 text-lg font-semibold text-white duration-300 bg-orange-900 rounded-lg hover:bg-gray-800 font-roboto'>Login</button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
