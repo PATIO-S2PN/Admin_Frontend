@@ -3,7 +3,7 @@ import axios from 'axios';
 import { GalleryContext } from '../Components/GalleryContext';
 import Swal from 'sweetalert2';
 import { FaEllipsisV } from 'react-icons/fa';
-
+import logo from '../Assets/logonew.svg';
 import { adminBackendUrl } from '../config';
 
 function showToast(status, message) {
@@ -77,13 +77,13 @@ const RestaurantGallery = () => {
       });
 
       const newImage = {
-        id: response.data.id,  // Make sure the backend returns the new image ID
+        id: response.data.id,
         src: URL.createObjectURL(selectedFiles[0]),
         name,
         description
       };
 
-      addImages([newImage]);  // Ensure newImage is in an array
+      addImages([newImage]);
       setSelectedFiles([]);
       setName('');
       setDescription('');
@@ -100,7 +100,7 @@ const RestaurantGallery = () => {
     const image = images[index];
     setName(image.name);
     setDescription(image.description);
-    setSelectedFiles([]); // Reset file input
+    setSelectedFiles([]);
     setEditingIndex(index);
   };
 
@@ -164,9 +164,6 @@ const RestaurantGallery = () => {
     <div className="min-h-screen bg-white p-4 md:p-9">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl md:text-4xl font-semibold text-orange-800">Restaurant Gallery</h1>
-    <div className="w-full h-auto bg-white p-9">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-4xl font-semibold text-orange-800">Restaurant Gallery</h1>
         <img src={logo} alt='logo' className='h-[50px] w-[170px] cursor-pointer' />
       </div>
       <form onSubmit={editingIndex !== null ? handleUpdatePhoto : handleAddPhotos}>

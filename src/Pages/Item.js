@@ -64,7 +64,7 @@ const Items = () => {
     const fetchItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`${productBackendUrl }`, {
+        const response = await axios.get(`${productBackendUrl}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -119,7 +119,7 @@ const Items = () => {
           </thead>
           <tbody>
             {filteredItems.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} className="hover:bg-orange-100">
                 <td className="px-4 py-2 border-b">{item.name}</td>
                 <td className="px-4 py-2 border-b">{item.description}</td>
                 <td className="px-4 py-2 border-b">{item.category}</td>

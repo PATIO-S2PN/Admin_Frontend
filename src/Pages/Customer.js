@@ -36,28 +36,28 @@ const Customer = () => {
         {filteredCustomers.length === 0 ? (
           <p>No customers found with the provided ID.</p>
         ) : (
-          <table className="w-full bg-orange-700 border-collapse border">
+          <table className="w-full bg-white border border-collapse border-gray-200">
             <thead>
-              <tr>
-                <th className="p-2 text-white">ID</th>
-                <th className="p-2 text-white">Customer</th>
-                <th className="p-2 text-white">Email</th>
-                <th className="p-2 text-white">Orders</th>
-                <th className="p-2 text-white">Total Spent</th>
-                <th className="p-2 text-white">City</th>
-                <th className="p-2 text-white">Last Orders</th>
+              <tr className="bg-orange-700 text-white">
+                <th className="p-2">ID</th>
+                <th className="p-2">Customer</th>
+                <th className="p-2">Email</th>
+                <th className="p-2">Orders</th>
+                <th className="p-2">Total Spent</th>
+                <th className="p-2">City</th>
+                <th className="p-2">Last Orders</th>
               </tr>
             </thead>
             <tbody>
               {filteredCustomers.map(customer => (
-                <tr key={customer.id}>
-                  <td className="bg-orange-50 p-2 text-center">{customer.id}</td>
-                  <td className="bg-orange-50 p-2 text-center">{customer.name}</td>
-                  <td className="bg-orange-50 p-2 text-center">{customer.email}</td>
-                  <td className="bg-orange-50 p-2 text-center">{customer.orders}</td>
-                  <td className="bg-orange-50 p-2 text-center">${customer.totalSpent}</td>
-                  <td className="bg-orange-50 p-2 text-center">{customer.city}</td>
-                  <td className="bg-orange-50 p-2 text-center">{customer.lastOrders}</td>
+                <tr key={customer.id} className="hover:bg-orange-200">
+                  <td className="p-2 border">{customer.id}</td>
+                  <td className="p-2 border">{customer.name}</td>
+                  <td className="p-2 border">{customer.email}</td>
+                  <td className="p-2 border">{customer.orders}</td>
+                  <td className="p-2 border">${customer.totalSpent}</td>
+                  <td className="p-2 border">{customer.city}</td>
+                  <td className="p-2 border">{customer.lastOrders}</td>
                 </tr>
               ))}
             </tbody>

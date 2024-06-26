@@ -133,10 +133,10 @@ const AddItem = () => {
               <option value="Submarines">Submarines</option>
               <option value="Pizza">Pizza</option>
               <option value="Rice Bowls">Rice Bowls</option>
+              <option value="Kottu Corner">Rice Bowls</option>
               <option value="Beverages">Beverages</option>
               <option value="Desserts">Desserts</option>
-              <option value="Salads">Salads</option>
-              <option value="Pasta">Pasta</option>
+              
             </select>
           </div>
           <div>
